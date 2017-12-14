@@ -1,0 +1,74 @@
+---
+layout: post
+title: "排序算法：选择排序"
+date: 2016-03-05 11:48:49 +0800
+comments: true
+categories:----- 排序相关,❺ 算法及基础题
+tags: []
+keyword: 陈浩翔, 谙忆
+description: 选择排序(Selection sort)是一种简单直观的排序算法。它的工作原理是每一次从待排序的数据元素中选出最小(或最大)的一个元素，存放在序列的起始位置，直到全部待排序的数据元素排完。 平均时间复杂度：O(n2)空间复杂度：O(1)  (用于交换和记录索引)package cn.hncu;import java.sql.Timestamp;public class selectSort { 
+---
+
+
+选择排序(Selection sort)是一种简单直观的排序算法。它的工作原理是每一次从待排序的数据元素中选出最小(或最大)的一个元素，存放在序列的起始位置，直到全部待排序的数据元素排完。 平均时间复杂度：O(n2)空间复杂度：O(1)  (用于交换和记录索引)package cn.hncu;import java.sql.Timestamp;public class selectSort {
+&#60;!-- more --&#62;
+----------
+
+选择排序(Selection sort)是一种简单直观的排序算法。它的工作原理是每一次从待排序的数据元素中选出最小(或最大)的一个元素，存放在序列的起始位置，直到全部待排序的数据元素排完。 
+
+平均时间复杂度：O(n2)
+
+空间复杂度：O(1)  (用于交换和记录索引)
+
+```java
+package cn.hncu;
+
+import java.sql.Timestamp;
+
+public class selectSort {
+	public static void main(String[] args) {
+		int[] a = new int[10000];
+		for(int i=0;i&#60;a.length;i++){
+			a[i] = (int)(Math.random()*a.length);
+		}
+		long startTime = System.currentTimeMillis();//返回以毫秒为单位的当前时间。
+		//1 选择排序
+		selectSort1(a);
+		
+		print(a);
+		long endTime = System.currentTimeMillis();//返回以毫秒为单位的当前时间。
+		System.out.println("程序运行时间: "+(endTime-startTime)+"ms");
+		
+		
+	}
+
+
+
+	private static void selectSort1(int[] a) {
+		for(int i=0;i&#60;a.length-1;i++){
+			int k=i;
+			for(int j=i;j&#60;a.length;j++){
+				if(a[k]&#62;a[j]){
+					k=j;//找到最小的值为a[k]
+				}
+			}
+			if(a[k]!=a[i]){//位运算交换值
+				a[k]=a[k]^a[i];
+				a[i]=a[k]^a[i];
+				a[k]=a[k]^a[i];
+			}
+		}
+	}
+
+
+
+	private static void print(int[] a) {
+		for(int i=0;i&#60;a.length;i++){
+			System.out.print(a[i]+" ");
+		}
+		System.out.println();
+	}
+
+}
+
+```

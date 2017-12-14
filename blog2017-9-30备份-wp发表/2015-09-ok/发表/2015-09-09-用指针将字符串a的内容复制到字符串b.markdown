@@ -1,0 +1,71 @@
+---
+layout: post
+title: "用指针将字符串a的内容复制到字符串b"
+date: 2015-09-09 09:50:08 +0800
+comments: true
+categories:❸ C/C++,----- C语言指针
+tags: [指针]
+keyword: 陈浩翔, 谙忆
+description: #include <stdio.h>
+#include <stdlib.h>/**int main()
+{
+    char a[]="i love you very mach!",b[100];
+    int i;
+    for(i=0;*(a+i)!='\0';i++)
+    {
+        *(b+i)=*(a+i);
+    }
+    *(b+i)='\0';
+    print 
+---
+
+
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;/**int main()
+{
+    char a[]="i love you very mach!",b[100];
+    int i;
+    for(i=0;*(a+i)!='\0';i++)
+    {
+        *(b+i)=*(a+i);
+    }
+    *(b+i)='\0';
+    print
+&#60;!-- more --&#62;
+----------
+
+```
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;
+
+/**int main()
+{
+    char a[]="i love you very mach!",b[100];
+    int i;
+    for(i=0;*(a+i)!='\0';i++)
+    {
+        *(b+i)=*(a+i);
+    }
+    *(b+i)='\0';
+    printf("a:%s\n",a);
+    printf("b:");
+    for(i=0;*(b+i)!='\0';i++)
+        printf("%c",*(b+i));
+    printf("\n");
+    return 0;
+}**/
+/**下面用指针来处理这个问题**/
+int main()
+{
+    char a[]="i love you!",b[100];
+    char *p1,*p2;
+    p1=a;p2=b;
+    for(;*p1!='\0';p1++,p2++)
+        *p2=*p1;
+    *p2='\0';
+    printf("a:%s\n",a);
+    printf("b:%s\n",b);
+    return 0;
+}
+
+```

@@ -1,0 +1,79 @@
+---
+layout: post
+title: "将若干字符串按字母顺序（由小到大）输出（用指针）"
+date: 2015-09-14 07:59:16 +0800
+comments: true
+categories:❸ C/C++,----- C语言指针
+tags: [指针]
+keyword: 陈浩翔, 谙忆
+description: #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>void sortt(char *name[],int n)
+{
+    int i,j;
+    char *temp;
+    for(i=0;i<5;i++)
+    {
+        for(j=i+1;j<5;j++)
+        {
+            if(st 
+---
+
+
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;
+#include &#60;string.h&#62;void sortt(char *name[],int n)
+{
+    int i,j;
+    char *temp;
+    for(i=0;i&#60;5;i++)
+    {
+        for(j=i+1;j&#60;5;j++)
+        {
+            if(st
+&#60;!-- more --&#62;
+----------
+
+```
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;
+#include &#60;string.h&#62;
+
+void sortt(char *name[],int n)
+{
+    int i,j;
+    char *temp;
+    for(i=0;i&#60;5;i++)
+    {
+        for(j=i+1;j&#60;5;j++)
+        {
+            if(strcmp(name[i],name[j])&#62;0)
+                /**
+设这两个字符串为str1，str2，
+若str1==str2，则返回零；
+若str1&#62;str2，则返回正数；
+若str1&#60;str2，则返回负数。**/
+            {
+                temp=name[i];
+                name[i]=name[j];
+                name[j]=temp;
+            }
+/**将name[i]和name[j]对换，也就是将指向第i个字符串的数组元素
+（是指针型元素）的值与指向第j个字符串的数组元素的值对换，
+也就是把它们的指向互换**/
+        }
+    }
+}
+int main()
+{
+    char *name[]={"i love you","Follow me","FOllOW me","I love you","Basic"};
+    int i,n=5;
+    sortt(name,n);
+    for(i=0;i&#60;n;i++)
+    {
+        printf("%s\n",name[i]);
+    }
+    return 0;
+}
+
+```

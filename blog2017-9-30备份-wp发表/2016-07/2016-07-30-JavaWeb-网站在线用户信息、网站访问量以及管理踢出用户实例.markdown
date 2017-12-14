@@ -1,0 +1,718 @@
+---
+layout: post
+title: "JavaWeb-网站在线用户信息、网站访问量以及管理踢出用户实例"
+date: 2016-07-30 03:18:21 +0800
+comments: true
+categories:❷ Java大学之行,----- ④、Web学习之旅,----- ----- JSP/XML知识点
+tags: [访问量,管理,实例,监听器,过滤器]
+keyword: 陈浩翔, 谙忆
+description: 转载请注明出处： http://blog.csdn.net/qq_26525215
+本文源自【大学之旅_谙忆的博客】
+这个稍微比上个版本做得完善了一点，用了JavaBean来封装用户信息，添加了一个管理踢用户的功能。 
+上一个的用户访问量是通过监听request来统计的，在这个实例中，我们也可以通过过滤器来实现统计网站访问量。直接看源码吧，感觉没多少要讲的，我习惯把解释写在代码中。部分源码index 
+---
+
+
+转载请注明出处： http://blog.csdn.net/qq_26525215
+本文源自【大学之旅_谙忆的博客】
+这个稍微比上个版本做得完善了一点，用了JavaBean来封装用户信息，添加了一个管理踢用户的功能。 
+上一个的用户访问量是通过监听request来统计的，在这个实例中，我们也可以通过过滤器来实现统计网站访问量。直接看源码吧，感觉没多少要讲的，我习惯把解释写在代码中。部分源码index
+&#60;!-- more --&#62;
+----------
+
+&#60;blockquote&#62;
+&#60;p background-color='#D3D3D3'&#62;转载请注明出处： http://blog.csdn.net/qq_26525215&#60;br&#62;
+本文源自&#60;strong&#62;【&#60;a href="http://blog.csdn.net/qq_26525215" target="_blank"&#62;大学之旅_谙忆的博客&#60;/a&#62;】&#60;/strong&#62;&#60;/p&#62;
+&#60;/blockquote&#62;
+
+
+这个稍微比上个版本做得完善了一点，用了JavaBean来封装用户信息，添加了一个管理踢用户的功能。
+上一个的用户访问量是通过监听request来统计的，在这个实例中，我们也可以通过过滤器来实现统计网站访问量。
+
+直接看源码吧，感觉没多少要讲的，我习惯把解释写在代码中。
+
+#部分源码
+
+##index.jsp:
+
+```
+&#60;%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%&#62;
+
+&#60;%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%&#62;
+
+&#60;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&#62;
+&#60;html&#62;
+&#60;head&#62;
+&#60;title&#62;在线人信息管理与统计&#60;/title&#62;
+&#60;/head&#62;
+
+&#60;body&#62;
+	&#60;h2&#62;在线人信息管理与统计&#60;/h2&#62;
+
+	&#60;c:if test="${empty sessionScope.user}" var="boo"&#62;
+		&#60;h3&#62;会员登录:&#60;/h3&#62;
+		&#60;form action='&#60;c:url value='/LoginServlet'&#62;&#60;/c:url&#62;' method="post"&#62;
+			姓名:&#60;input type='text' name="name"&#62;&#60;br /&#62; &#60;input type="submit"
+				value="注册"&#62;
+		&#60;/form&#62;
+	&#60;/c:if&#62;
+
+	&#60;c:if test="${!boo}"&#62;
+  		亲爱的${user.name}
+  		&#60;c:if test="${user.admin}" var="bo"&#62;
+  			-管理员
+  		&#60;/c:if&#62;
+		&#60;c:if test="${!bo}"&#62;
+  			-会员
+  		&#60;/c:if&#62;
+  		,欢迎来到...&#60;br /&#62;
+	&#60;/c:if&#62;
+
+	&#60;br /&#62;
+	&#60;a href="&#60;c:url value='/servlet/ShowServlet'/&#62;"&#62;显示所有在线用户&#60;/a&#62;
+	&#60;br /&#62;
+	&#60;a href="&#60;c:url value='/servlet/LogOutServlet'/&#62;"&#62;安全退出&#60;/a&#62;
+	
+	&#60;br/&#62;网站访问量:${count}
+
+&#60;/body&#62;
+&#60;/html&#62;
+
+```
+
+##MyServletContextListener
+
+这个就是实现把访问量持久化的监听器实现类：
+
+```
+package cn.hncu.listeners;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+public class MyServletContextListener implements ServletContextListener{
+
+	@Override
+	public void contextInitialized(ServletContextEvent sce) {
+		//从服务器硬盘把之前存储的点击量数据读取出来
+		ServletContext sct = sce.getServletContext();
+		String path = sct.getRealPath("/count.txt");
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(path));
+			String line = br.readLine();
+			Integer count = Integer.valueOf(line);
+			sct.setAttribute("count", count);
+		} catch (Exception e) {
+			//如果出异常了，我们认为文件还不存在，服务器第一次启动
+			e.printStackTrace();
+			sct.setAttribute("count",new Integer(0));
+		}
+		
+	}
+	
+	//关闭服务器时
+	@Override
+	public void contextDestroyed(ServletContextEvent sce) {
+		//把当前servletContext容器中存储的点击量数据 永久化到  服务器硬盘
+		ServletContext sct = sce.getServletContext();
+		String path = sct.getRealPath("/count.txt");
+		
+		try {
+			PrintWriter pw = new PrintWriter(path);
+			pw.write(""+sct.getAttribute("count"));
+			pw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	
+	}
+
+}
+
+```
+
+##CharsetFilter
+
+实现统计访问量和全站编码的过滤器
+
+
+```
+package cn.hncu.filter;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+
+public class CharsetFilter implements Filter{
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+	}
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		response.setCharacterEncoding("utf-8");
+		
+		//获取该用户的ip,存储到它的session对象中
+		HttpServletRequest req = (HttpServletRequest) request;
+		if(req.getSession().getAttribute("ip")==null){
+			req.getSession().setAttribute("ip", req.getRemoteAddr());
+			//这里的req和request是同一个对象！！！
+			//所以传过去的参数还可以是request
+		}
+		
+		//new一个线程统计访问量
+		new MyThread(request.getServletContext()).start();
+		
+		//放行
+		chain.doFilter(request, response);
+	}
+	@Override
+	public void destroy() {
+	}
+}
+
+class MyThread extends Thread{
+	private ServletContext servletContext =null;
+	private static Object boj = new Object();
+	
+	public MyThread(ServletContext servletContext) {
+		this.servletContext = servletContext;
+	}
+
+	@Override
+	public void run() {
+		synchronized (boj) {
+			servletContext.setAttribute("count",(Integer)servletContext.getAttribute("count")+1);
+		}
+	}
+	
+}
+```
+
+##LoginFilter
+
+用户访问其他页面时进行的权限过滤:
+
+如果你没有登陆，就不给你权限去访问除主页外的其他页面。
+
+```
+package cn.hncu.filter;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class LoginFilter implements Filter{
+
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+	}
+
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
+		HttpServletRequest req = (HttpServletRequest) request;
+		if(req.getSession().getAttribute("user")==null){
+			HttpServletResponse resp = (HttpServletResponse) response;
+			resp.sendRedirect(req.getContextPath()+"/index.jsp");
+		}else{//放行
+			chain.doFilter(request, response);
+		}
+	}
+
+	@Override
+	public void destroy() {
+	}
+	
+	
+}
+
+```
+
+##MySessionListener
+
+有用户来访问时，我们就通过监听器去监听session的创建与销毁，在这里，我们认为一个session就是一个用户！
+
+```
+package cn.hncu.listeners;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+
+public class MySessionListener implements HttpSessionListener{
+
+	@Override
+	public void sessionCreated(HttpSessionEvent se) {
+		Map&#60;String, HttpSession&#62; onLines = (Map&#60;String, HttpSession&#62;) se.getSession().getServletContext().getAttribute("onLines");
+		if(onLines==null){//第一个来访问的
+			onLines = Collections.synchronizedMap(new HashMap&#60;String, HttpSession&#62;() );//使用同步技术的Map
+			se.getSession().getServletContext().setAttribute("onLines", onLines);
+		}
+		onLines.put(se.getSession().getId(), se.getSession());
+	}
+	
+	@Override
+	public void sessionDestroyed(HttpSessionEvent se) {
+		Map&#60;String, HttpSession&#62; onLines = (Map&#60;String, HttpSession&#62;) se.getSession().getServletContext().getAttribute("onLines");
+		//这里也要防范好！多线程，多个管理同时踢一个人的时候，如果不防范就会出问题
+		if(onLines.containsKey( se.getSession().getId() )){
+			onLines.remove( se.getSession().getId() );
+		}
+		
+	}
+	
+	
+}
+
+```
+
+##LoginServlet
+
+用于判断用户登录与设置管理员的servlet。
+
+```
+package cn.hncu.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Random;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import cn.hncu.domain.User;
+
+public class LoginServlet extends HttpServlet {
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String name = request.getParameter("name");
+		if(name!=null && name.trim().length()&#62;0){
+			User user = new User();
+			user.setName(name);
+			//用user作为参数到后台登录，这里我们简化了，直接假设登录成功
+			if(true){
+				Random r = new Random();
+				int a = r.nextInt(2);
+				if(a%2==0){
+					user.setAdmin(true);
+				}else{
+					user.setAdmin(false);
+				}
+			}
+			request.getSession().setAttribute("user", user);
+		}
+		
+		response.sendRedirect(request.getContextPath()+"/index.jsp");
+	}
+
+}
+
+```
+
+
+
+##LogOutServlet
+
+用于用户的安全退出！
+
+```
+package cn.hncu.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class LogOutServlet extends HttpServlet {
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		//用户安全退出很简单，我们在服务器端移除用户的session就可以了
+		request.getSession().invalidate();
+		
+		response.sendRedirect(request.getContextPath()+"/index.jsp");
+	}
+}
+
+```
+
+##ShowServlet
+
+显示所有用户信息时的servlet，需要把信息全部封装到request这个容器中，再转发到前台jsp显示的页面。
+
+```
+package cn.hncu.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+public class ShowServlet extends HttpServlet {
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		Map&#60;String, HttpSession&#62; onLines = (Map&#60;String, HttpSession&#62;) getServletContext().getAttribute("onLines"); 
+		
+		List&#60;Map&#60;String, Object&#62;&#62; lists = new ArrayList&#60;Map&#60;String,Object&#62;&#62;();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		//遍历onlines，针对每个session对象封装一个map(信息包含:name,createTime,lastAccessTime,ip)，把该map添加到list当中
+		Iterator&#60;Entry&#60;String, HttpSession&#62;&#62; it = onLines.entrySet().iterator();
+		while(it.hasNext()){
+			Entry&#60;String, HttpSession&#62; en = it.next();
+			
+			Map&#60;String, Object&#62; m = new HashMap&#60;String, Object&#62;();
+			
+			m.put("id", en.getValue().getId() );
+			m.put("user", en.getValue().getAttribute("user"));
+			
+			String creationTime = sdf.format(new Date(en.getValue().getCreationTime()));
+			m.put("creationTime", creationTime);
+			String lastAccessTime = sdf.format( new Date(en.getValue().getLastAccessedTime()) );
+			m.put("lastAccessTime", lastAccessTime);
+			
+			 //注意,该ip数据是在CharsetFilter中封装的
+			m.put("ip", en.getValue().getAttribute("ip"));
+			
+			lists.add(m);
+		}
+		
+		request.setAttribute("onLines", lists);
+		request.getRequestDispatcher("/jsps/show.jsp").forward(request, response);
+	}
+}
+
+```
+
+##show.jsp
+
+前台在线用户的显示页面，会员和管理员看到的页面是不同的，管理员可以踢人。
+
+```
+&#60;%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%&#62;
+&#60;%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %&#62;
+
+&#60;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&#62;
+&#60;html&#62;
+  &#60;head&#62;
+    &#60;title&#62;在线人信息管理&#60;/title&#62;
+    &#60;style type="text/css"&#62;
+       table{
+          border: 1px solid red;
+          border-collapse: collapse;/*设置单线-线合并*/
+          width: 80%;
+       }
+       td{
+          border: 1px solid red;
+          padding:3px;
+       }
+       .header{
+         background: gray;
+       }
+    &#60;/style&#62;
+  &#60;/head&#62;
+  
+  &#60;body&#62;
+	&#60;h2&#62;以下是所有在线用户信息&#60;/h2&#62;   
+    &#60;table&#62;
+       &#60;tr class="header" &#62;
+          &#60;td&#62;姓名&#60;/td&#62;  &#60;td&#62;上线时间&#60;/td&#62;  &#60;td&#62;最后访问时间&#60;/td&#62; &#60;td&#62;IP&#60;/td&#62; &#60;td&#62;操作&#60;/td&#62;
+       &#60;/tr&#62;
+       
+       &#60;c:forEach items="${requestScope.onLines}" var="map"&#62;
+       	&#60;tr&#62;
+       		&#60;td&#62;
+       			&#60;c:if test="${empty map.user}" var="boo"&#62;
+					游客       			
+       			&#60;/c:if&#62;
+       			&#60;c:if test="${!boo}"&#62;
+       				${map.user.name}
+       			&#60;/c:if&#62;
+       		&#60;/td&#62;
+       		&#60;td&#62;${map.creationTime}  &#60;/td&#62;
+            &#60;td&#62;${map.lastAccessTime}&#60;/td&#62;
+            &#60;td&#62;${map.ip }           &#60;/td&#62;
+       		
+       		&#60;td&#62;
+       			&#60;c:if test="${!boo&&user.admin}"&#62;
+       				 &#60;a href="&#60;c:url value='/servlet/KickOutServlet?id=${map.id}'/&#62; " &#62;踢出${map.user.name}&#60;/a&#62;
+       			&#60;/c:if&#62;
+       		&#60;/td&#62;
+       	&#60;/tr&#62;
+       &#60;/c:forEach&#62;
+    &#60;/table&#62;
+       &#60;br/&#62;网站访问量:${count}
+  &#60;/body&#62;
+&#60;/html&#62;
+
+```
+
+##KickOutServlet
+
+管理踢人时请求的servlet，在这里我们把被踢的人的session从服务器端移除就可以了。但是注意防范一下，那个被踢者是否已经被踢走了、
+
+```
+package cn.hncu.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+public class KickOutServlet extends HttpServlet {
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		response.setContentType("text/html");
+		
+		PrintWriter out = response.getWriter();
+		String id = request.getParameter("id");
+		Map&#60;String, HttpSession&#62; onLines = (Map&#60;String, HttpSession&#62;) getServletContext().getAttribute("onLines");
+		
+		if(onLines.containsKey(id)){
+			HttpSession session = onLines.get(id);//得到该session
+			session.invalidate();//移除该session
+			out.println("该用户已被踢出!");
+		}else{
+			out.println("该用户已经不存在!");
+	    }
+	}
+}
+
+```
+
+##user
+
+JavaBean,在这里，我就是简单的封装了一个JavaBean使用了。我们的知识点并不是这里。
+
+```
+package cn.hncu.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+public class KickOutServlet extends HttpServlet {
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		response.setContentType("text/html");
+		
+		PrintWriter out = response.getWriter();
+		String id = request.getParameter("id");
+		Map&#60;String, HttpSession&#62; onLines = (Map&#60;String, HttpSession&#62;) getServletContext().getAttribute("onLines");
+		
+		if(onLines.containsKey(id)){
+			HttpSession session = onLines.get(id);//得到该session
+			session.invalidate();//移除该session
+			out.println("该用户已被踢出!");
+		}else{
+			out.println("该用户已经不存在!");
+	    }
+	}
+}
+
+```
+
+##web.xml
+
+注意啊！无论是servlet还是监听器，过滤器！一定要记得配置web.xml
+
+```
+&#60;?xml version="1.0" encoding="UTF-8"?&#62;
+&#60;web-app version="3.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"&#62;
+  &#60;display-name&#62;&#60;/display-name&#62;	
+  
+  &#60;listener&#62;
+  	&#60;listener-class&#62;cn.hncu.listeners.MyServletContextListener&#60;/listener-class&#62;
+  &#60;/listener&#62;
+  &#60;listener&#62;
+  	&#60;listener-class&#62;cn.hncu.listeners.MySessionListener&#60;/listener-class&#62;
+  &#60;/listener&#62;
+  
+  &#60;servlet&#62;
+    &#60;servlet-name&#62;LoginServlet&#60;/servlet-name&#62;
+    &#60;servlet-class&#62;cn.hncu.servlet.LoginServlet&#60;/servlet-class&#62;
+  &#60;/servlet&#62;
+  &#60;servlet&#62;
+    &#60;servlet-name&#62;LogOutServlet&#60;/servlet-name&#62;
+    &#60;servlet-class&#62;cn.hncu.servlet.LogOutServlet&#60;/servlet-class&#62;
+  &#60;/servlet&#62;
+  &#60;servlet&#62;
+    &#60;servlet-name&#62;ShowServlet&#60;/servlet-name&#62;
+    &#60;servlet-class&#62;cn.hncu.servlet.ShowServlet&#60;/servlet-class&#62;
+  &#60;/servlet&#62;
+  &#60;servlet&#62;
+    &#60;servlet-name&#62;KickOutServlet&#60;/servlet-name&#62;
+    &#60;servlet-class&#62;cn.hncu.servlet.KickOutServlet&#60;/servlet-class&#62;
+  &#60;/servlet&#62;
+
+  &#60;servlet-mapping&#62;
+    &#60;servlet-name&#62;LoginServlet&#60;/servlet-name&#62;
+    &#60;url-pattern&#62;/LoginServlet&#60;/url-pattern&#62;
+  &#60;/servlet-mapping&#62;
+  &#60;servlet-mapping&#62;
+    &#60;servlet-name&#62;LogOutServlet&#60;/servlet-name&#62;
+    &#60;url-pattern&#62;/servlet/LogOutServlet&#60;/url-pattern&#62;
+  &#60;/servlet-mapping&#62;
+  &#60;servlet-mapping&#62;
+    &#60;servlet-name&#62;ShowServlet&#60;/servlet-name&#62;
+    &#60;url-pattern&#62;/servlet/ShowServlet&#60;/url-pattern&#62;
+  &#60;/servlet-mapping&#62;
+  &#60;servlet-mapping&#62;
+    &#60;servlet-name&#62;KickOutServlet&#60;/servlet-name&#62;
+    &#60;url-pattern&#62;/servlet/KickOutServlet&#60;/url-pattern&#62;
+  &#60;/servlet-mapping&#62;
+  
+  &#60;filter&#62;
+  	&#60;filter-name&#62;charset&#60;/filter-name&#62;
+  	&#60;filter-class&#62;cn.hncu.filter.CharsetFilter&#60;/filter-class&#62;
+  &#60;/filter&#62;
+  &#60;filter&#62;
+    &#60;filter-name&#62;login&#60;/filter-name&#62;
+    &#60;filter-class&#62;cn.hncu.filter.LoginFilter&#60;/filter-class&#62;
+  &#60;/filter&#62;
+  
+
+  &#60;filter-mapping&#62;
+    &#60;filter-name&#62;login&#60;/filter-name&#62;
+    &#60;url-pattern&#62;/servlet/*&#60;/url-pattern&#62;
+    &#60;url-pattern&#62;/jsps/*&#60;/url-pattern&#62;
+  &#60;/filter-mapping&#62;
+  &#60;filter-mapping&#62;
+  	&#60;filter-name&#62;charset&#60;/filter-name&#62;
+  	&#60;url-pattern&#62;/*&#60;/url-pattern&#62;
+  &#60;/filter-mapping&#62;
+  
+  &#60;welcome-file-list&#62;
+    &#60;welcome-file&#62;index.jsp&#60;/welcome-file&#62;
+  &#60;/welcome-file-list&#62;
+&#60;/web-app&#62;
+
+```
+
+##演示结果：
+
+###登录之前显示的主页:
+
+未登录的时候，是无法进入显示所有在线用户的，用过滤器拦截了。
+
+![](http://img.blog.csdn.net/20160820164527068)
+
+###登录之后显示的主页:
+
+![](http://img.blog.csdn.net/20160820164559725)
+
+###管理员登录后显示的在线人信息
+
+如果不是管理员登录后，最后的操作时不会显示的。
+
+![](http://img.blog.csdn.net/20160820164649960)
+
+
+
+#完整的项目链接：
+https://github.com/chenhaoxiang/Java/tree/master/myOnlinesWeb2
+
+ 	myOnlinesWeb2.zip压缩文件
+
+
+希望本篇博客对大家有一点用(^-^)
+
+
+&#60;blockquote&#62;
+&#60;p background-color='#D3D3D3'&#62;转载请注明出处： http://blog.csdn.net/qq_26525215&#60;br&#62;
+本文源自&#60;strong&#62;【&#60;a href="http://blog.csdn.net/qq_26525215" target="_blank"&#62;大学之旅_谙忆的博客&#60;/a&#62;】&#60;/strong&#62;&#60;/p&#62;
+&#60;/blockquote&#62;

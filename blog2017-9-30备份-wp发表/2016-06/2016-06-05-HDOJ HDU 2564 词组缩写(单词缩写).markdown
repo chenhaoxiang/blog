@@ -1,0 +1,82 @@
+---
+layout: post
+title: "HDOJ HDU 2564 词组缩写(单词缩写)"
+date: 2016-06-05 01:37:30 +0800
+comments: true
+categories:❶ ACM,----- HDOJ-JAVA,❺ 算法及基础题,----- String
+tags: [java,acm,单词]
+keyword: 陈浩翔, 谙忆
+description: Problem Description 
+定义：一个词组中每个单词的首字母的大写组合称为该词组的缩写。 
+比如，C语言里常用的EOF就是end of file的缩写。Input 
+输入的第一行是一个整数T，表示一共有T组测试数据； 
+接下来有T行，每组测试数据占一行，每行有一个词组，每个词组由一个或多个单词组成；每组的单词个数不超过10个，每个单词有一个或多个大写或小写字母组成； 
+单词长度不超过1 
+---
+
+
+Problem Description 
+定义：一个词组中每个单词的首字母的大写组合称为该词组的缩写。 
+比如，C语言里常用的EOF就是end of file的缩写。Input 
+输入的第一行是一个整数T，表示一共有T组测试数据； 
+接下来有T行，每组测试数据占一行，每行有一个词组，每个词组由一个或多个单词组成；每组的单词个数不超过10个，每个单词有一个或多个大写或小写字母组成； 
+单词长度不超过1
+&#60;!-- more --&#62;
+----------
+
+Problem Description
+定义：一个词组中每个单词的首字母的大写组合称为该词组的缩写。
+比如，C语言里常用的EOF就是end of file的缩写。
+
+ 
+
+Input
+输入的第一行是一个整数T，表示一共有T组测试数据；
+接下来有T行，每组测试数据占一行，每行有一个词组，每个词组由一个或多个单词组成；每组的单词个数不超过10个，每个单词有一个或多个大写或小写字母组成；
+单词长度不超过10，由一个或多个空格分隔这些单词。
+
+ 
+
+Output
+请为每组测试数据输出规定的缩写，每组输出占一行。
+ 
+
+Sample Input
+1
+end of file 
+ 
+
+Sample Output
+EOF
+
+&#60;font color="red"&#62;
+大水题~ JAVA大发法好啊。
+&#60;/font&#62;
+
+```
+import java.util.Scanner;
+
+/**
+ * @author 陈浩翔
+ * 2016-6-5
+ */
+public class Main{
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int t=sc.nextInt();
+		sc.nextLine();
+		while(t--&#62;0){
+			String str=sc.nextLine();
+			String[] s=str.split(" ");
+			String result="";
+			for(int i=0;i&#60;s.length;i++){
+				if(s[i].length()>=1)
+					result+=s[i].charAt(0);
+			}
+			System.out.println(result.toUpperCase());
+		}
+	}
+}
+
+```

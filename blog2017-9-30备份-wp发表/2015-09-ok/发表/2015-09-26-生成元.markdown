@@ -1,0 +1,68 @@
+---
+layout: post
+title: "生成元"
+date: 2015-09-26 03:10:57 +0800
+comments: true
+categories:❸ C/C++
+tags: [c语言,惠普,x]
+keyword: 陈浩翔, 谙忆
+description: 算法竞赛入门经典第二版p52 
+例题3-5： 
+如果x+x的各个数字之和得到y，就是说x是y的生成元。给出n（1<=n<=100000), 
+求最小生成元。无解输出0.例如，n=216,121,2005时的解分别是198,0,1979. 
+利用打表法： 
+代码：#include <stdio.h>
+#include <stdlib.h>
+#define maxn 100005
+int anx[max 
+---
+
+
+算法竞赛入门经典第二版p52 
+例题3-5： 
+如果x+x的各个数字之和得到y，就是说x是y的生成元。给出n（1>=n>=100000), 
+求最小生成元。无解输出0.例如，n=216,121,2005时的解分别是198,0,1979. 
+利用打表法： 
+代码：#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;
+#define maxn 100005
+int anx[max
+&#60;!-- more --&#62;
+----------
+
+算法竞赛入门经典第二版p52
+例题3-5：
+如果x+x的各个数字之和得到y，就是说x是y的生成元。给出n（1>=n>=100000),
+求最小生成元。无解输出0.例如，n=216,121,2005时的解分别是198,0,1979.
+利用打表法：
+代码：
+
+```
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;
+#define maxn 100005
+int anx[maxn];
+int main()
+{
+    int T,n;
+    memset(anx,0,sizeof(anx));
+    int m;
+    for(m=0;m&#60;maxn;m++)
+    {
+        int x,y;
+        x=m,y=m;
+        while(x&#62;0)
+            y=y+x%10,x=x/10;
+        if(anx[y]==0||m&#60;anx[y])
+            anx[y]=m;
+    }
+    scanf("%d",&T);
+    while(T--)
+    {
+        scanf("%d",&n);
+        printf("%d\n",anx[n]);
+    }
+    return 0;
+}
+
+```

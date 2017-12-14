@@ -1,0 +1,68 @@
+---
+layout: post
+title: "返回指针值的函数（2）"
+date: 2015-09-12 05:00:32 +0800
+comments: true
+categories:❸ C/C++,----- C语言指针
+tags: [函数,指针]
+keyword: 陈浩翔, 谙忆
+description: 请自己理解，比较简单/**对前面那个问题，输出有不及格成绩的学生的所有成绩**/
+#include <stdio.h>
+#include <stdlib.h>int main()
+{
+    float a[3][4]={{50,99,80,50},{55,60,85,90},{10,54,74,26}};
+    float *p;
+    float  *aa(float (*pt)[4]); 
+---
+
+
+请自己理解，比较简单/**对前面那个问题，输出有不及格成绩的学生的所有成绩**/
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;int main()
+{
+    float a[3][4]={{50,99,80,50},{55,60,85,90},{10,54,74,26}};
+    float *p;
+    float  *aa(float (*pt)[4]);
+&#60;!-- more --&#62;
+----------
+
+请自己理解，比较简单
+```
+/**对前面那个问题，输出有不及格成绩的学生的所有成绩**/
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;
+
+int main()
+{
+    float a[3][4]={{50,99,80,50},{55,60,85,90},{10,54,74,26}};
+    float *p;
+    float  *aa(float (*pt)[4]);
+    int i;
+    for(i=0;i&#60;3;i++)
+    {
+        p=aa((a+i));
+        if(p==*(a+i))
+        {
+            int j;
+            for(j=0;j&#60;4;j++)
+                printf("%5.2f ",*(p+j));
+            printf("\n");
+        }
+    }
+    return 0;
+}
+
+float *aa(float (*pt)[4])
+{
+    float *ps;
+    ps=NULL;
+    int i;
+    for(i=0;i&#60;4;i++)
+    {
+        if(*(*pt+i)&#60;60)
+            ps=*pt;
+    }
+    return ps;
+}
+
+```

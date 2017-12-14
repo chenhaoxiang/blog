@@ -1,0 +1,61 @@
+---
+layout: post
+title: "返回指针值的函数（1）"
+date: 2015-09-12 04:40:34 +0800
+comments: true
+categories:----- C语言指针,❸ C/C++
+tags: [函数,指针]
+keyword: 陈浩翔, 谙忆
+description: /**有a个学生，每个学生有b门课程的成绩。要求在用户输入学生序号以后，
+**/
+#include <stdio.h>
+#include <stdlib.h>int main()
+{
+    float *aa(int (*p)[4],int n);
+    float a[3][4]={{50,99,80,50},{55,60,85,90},{10,54,74,26}};
+    float *p 
+---
+
+
+/**有a个学生，每个学生有b门课程的成绩。要求在用户输入学生序号以后，
+**/
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;int main()
+{
+    float *aa(int (*p)[4],int n);
+    float a[3][4]={{50,99,80,50},{55,60,85,90},{10,54,74,26}};
+    float *p
+&#60;!-- more --&#62;
+----------
+
+```
+/**有a个学生，每个学生有b门课程的成绩。要求在用户输入学生序号以后，
+**/
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;
+
+int main()
+{
+    float *aa(int (*p)[4],int n);
+    float a[3][4]={{50,99,80,50},{55,60,85,90},{10,54,74,26}};
+    float *pt;
+    int k;
+    scanf("%d",&k);
+    pt=aa(a,k);
+    int i;
+    for(i=0;i&#60;4;i++)
+        printf("%.2f ",*(pt+i));
+    return 0;
+}
+
+float *aa(int (*p)[4],int n)
+{
+    float *pp;
+    pp=*(p+n);
+    return pp;
+}
+/**函数aa定义为指针型函数，它的形参p是指向包含4个元素的
+一维数组的指针变量。p+1指向aa数组序号为1的行（学生序号从0开始）
+pt是指向float型数据的指针变量,*(pt+i)表示该学生的第i门课程的成绩**/
+
+```

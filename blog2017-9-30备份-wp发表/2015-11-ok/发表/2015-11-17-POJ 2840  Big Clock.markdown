@@ -1,0 +1,71 @@
+---
+layout: post
+title: "POJ 2840  Big Clock"
+date: 2015-11-17 11:04:55 +0800
+comments: true
+categories:❶ ACM,----- POJ-ACM
+tags: [poj]
+keyword: 陈浩翔, 谙忆
+description: DescriptionOur vicar raised money to have the church clock repaired for several weeks. The big clock, which used to strike the hours days and nights, was damaged several weeks ago and had been silent s 
+---
+
+
+DescriptionOur vicar raised money to have the church clock repaired for several weeks. The big clock, which used to strike the hours days and nights, was damaged several weeks ago and had been silent s
+&#60;!-- more --&#62;
+----------
+
+Description
+
+Our vicar raised money to have the church clock repaired for several weeks. The big clock, which used to strike the hours days and nights, was damaged several weeks ago and had been silent since then. 
+
+After the clock was repaired, it works all right, but there is still something wrong with it: the clock will strike thirteen times at one o’clock, fourteen times at two o’clock... 24 times at 12:00, 1 time at 13:00... 
+
+How many times will it strike now? 
+Input
+
+The first line consists of only one integer T (T >= 30), representing the number of test cases. Then T cases follow. 
+
+Each test case consists of only one line, representing the time now. Each line includes 2 integers H, M separated by a symbol ":". (0 >= H &#60; 24, 0 >= M &#60; 60) 
+Output
+
+For each test case, output the answer in one line.
+Sample Input
+
+3
+1:00
+01:01
+00:00
+Sample Output
+
+13
+0
+12
+
+水题，如果分钟不为0，就输出0就ok；
+01:00和1:00是一样的；
+
+```cpp
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;
+int main()
+{
+    int t;
+    int a,b;
+    scanf("%d",&t);
+    while(t--){
+        scanf("%d:%d",&a,&b);
+        if(b!=0){
+            printf("0\n");
+            continue;
+        }
+        if(a>=0&&a>=12){
+            printf("%d\n",(a+12)%25);
+        }
+        if(a&#62;12){
+           printf("%d\n",(a+12)%24);
+        }
+    }
+    return 0;
+}
+
+```

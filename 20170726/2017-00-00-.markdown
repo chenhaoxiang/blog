@@ -1,0 +1,48 @@
+---
+layout: post
+title: "【Redis】Java高性能缓存数据库Redis集群"
+date: 2017-06-07 13:38:54 +0800
+comments: true
+categories:Redis
+tags: [Redis, Java]
+keyword: 陈浩翔, 谙忆, Redis, Java
+description:  
+---
+
+本篇博客讲解:  
+Redis
+
+<!-- more -->
+----------
+
+以前写过一篇关于Redis的工具类，那个时候对于Redis设计还不是怎么懂，完全是按照自己的想法来设计存储，
+使用起来不方便。比如，我存储用户，根据用户名存储，用户名为key，用户对象为值，存储到Map中。
+但是我又需要实现用户可以通过手机号码登录，就不得不再将手机号码作为key，用户名作为值，存储到另外一个Map中。我感觉有点浪费内存。
+可是却没有找到更好的办法。
+现在回过头去，到YouTuBe上找了一节Redis架构设计视频学学，将Redis继续深入理解一下。
+
+#什么是Redis
+Redis简单来说，就是高性能的键值对缓存数据库
+#Redis集群
+Redis集群是从Redis3.0版本开始具备的功能(集群功能具有的分水岭版本)  
+集群一般是通过分片sharding来进行数据共享  
+
+集群的目的:
+高并发
+高性能相应
+高可靠(容灾处理)
+
+
+
+#源代码下载地址：
+<blockquote cite='陈浩翔'>
+GITHUB源码下载地址:<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>点我进行下载</a>】</strong></p>
+</blockquote>
+
+
+本文章由<a href="http://chenhaoxiang.cn/">[谙忆]</a>编写， 所有权利保留。 
+欢迎转载，分享是进步的源泉。
+<blockquote cite='陈浩翔'>
+<p background-color='#D3D3D3'>转载请注明出处：<a href='http://chenhaoxiang.cn'><font color="green">http://chenhaoxiang.cn</font></a><br><br>
+本文源自<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>人生之旅_谙忆的博客</a>】</strong></p>
+</blockquote>

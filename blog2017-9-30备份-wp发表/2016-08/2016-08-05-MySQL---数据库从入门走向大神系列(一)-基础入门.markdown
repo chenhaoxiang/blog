@@ -1,0 +1,451 @@
+---
+layout: post
+title: "MySQL---数据库从入门走向大神系列(一)-基础入门"
+date: 2016-08-05 05:47:12 +0800
+comments: true
+categories:❷ Java大学之行,----- ⑤、数据库
+tags: [数据库,SQL]
+keyword: 陈浩翔, 谙忆
+description: 从最开始的创建数据库，创建表，创建列开始写起，再到常用的EXISTS函数，SELECT 复杂查询，模糊查询LIKE，创建视图 等深入学习。
+为了对单词加深印象，全部在DOS下演示！
+
+创建数据库、表
+create database hncu character set utf8; 
+创建名为hncu编码为utf-8的数据库。
+
+
+use hncu;  打开hncu这个数据库。(必须 
+---
+
+
+从最开始的创建数据库，创建表，创建列开始写起，再到常用的EXISTS函数，SELECT 复杂查询，模糊查询LIKE，创建视图 等深入学习。
+为了对单词加深印象，全部在DOS下演示！
+
+创建数据库、表
+create database hncu character set utf8; 
+创建名为hncu编码为utf-8的数据库。
+
+
+use hncu;  打开hncu这个数据库。(必须
+&#60;!-- more --&#62;
+----------
+
+
+&#60;p&#62;&#60;span id="wmd-input-section-90" class="wmd-input-section" style="color:rgb(90,90,90); font-family:'microsoft yahei'; line-height:29.7px; white-space:pre-wrap; outline:none!important"&#62;&#60;span class="token p" style="outline:none!important"&#62;&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;span style="font-size:14px"&#62;从最开始的创建数据库，创建表，创建列开始写起，再到常用的EXISTS函数，SELECT 复杂查询，模糊查询LIKE，创建视图 等深入学习。&#60;br&#62;
+为了对单词加深印象，全部在DOS下演示！&#60;br&#62;
+&#60;br&#62;
+&#60;/span&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#ff0000"&#62;创建数据库、表&#60;/span&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_1_9356358"  code_snippet_id="1811511" snippet_file_name="blog_20160805_1_9356358" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;create database hncu character set utf8; &lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;创建名为hncu编码为utf-8的数据库。&#60;/span&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_2_9595555"  code_snippet_id="1811511" snippet_file_name="blog_20160805_2_9595555" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;use hncu; &lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&nbsp;打开hncu这个数据库。(必须要打开一个数据库才能在这个数据库下面创建table哦)&#60;/span&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805121541375" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;span style="font-size:14px"&#62;&#60;strong&#62;&#60;span style="color:#ff0000"&#62;创建表&#26684;stud&#60;/span&#62;&#60;/strong&#62;&#60;br&#62;
+&#60;/span&#62;&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_3_1090055"  code_snippet_id="1811511" snippet_file_name="blog_20160805_3_1090055" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt; create table stud(
+ sno varchar(15) not null primary key,
+ sname varchar(15) not null,
+ age int,
+ saddress varchar(15)
+ );&lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805121719516" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;strong&#62;&#60;span style="color:#ff0000"&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/span&#62;&#60;/strong&#62;&#60;/p&#62;
+&#60;p&#62;&#60;strong&#62;&#60;span style="color:#ff0000"&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/span&#62;&#60;/strong&#62;&#60;/p&#62;
+&#60;span style="font-size:14px"&#62;&#60;strong&#62;&#60;span style="color:#ff0000"&#62;表&#26684;添加数据:&#60;/span&#62;&#60;/strong&#62;&#60;br&#62;
+&#60;/span&#62;&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_4_740608"  code_snippet_id="1811511" snippet_file_name="blog_20160805_4_740608" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;insert into stud values(&#39;1001&#39;,&#39;Jack&#39;,20,&#39;纽约&#39;);
+insert into stud values(&#39;1002&#39;,&#39;Tom&#39;,30,&#39;纽约&#39;);
+insert into stud values(&#39;1003&#39;,&#39;张三&#39;,24,&#39;湖南益阳&#39;);
+insert into stud values(&#39;1004&#39;,&#39;张四&#39;,15,&#39;湖南长沙&#39;);
+insert into stud values(&#39;1005&#39;,&#39;李四&#39;,22,&#39;湖南益阳&#39;);
+insert into stud values(&#39;1006&#39;,&#39;张三丰&#39;,80,&#39;武侠&#39;);
+insert into stud values(&#39;1007&#39;,&#39;郭襄&#39;,75,&#39;武侠&#39;);
+insert into stud values(&#39;1008&#39;,&#39;灭绝师太&#39;,10,&#39;武侠&#39;);&lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805121740181" alt=""&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;strong&#62;&#60;span style="color:#ff0000"&#62;&#60;span style="font-size:14px"&#62;查看stud表的数据:&#60;/span&#62;&#60;/span&#62;&#60;/strong&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_5_2899416"  code_snippet_id="1811511" snippet_file_name="blog_20160805_5_2899416" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select * from stud;&lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805122324596" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#33cc00"&#62;&#60;span style="font-size:14px"&#62;给列名取别名显示：&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_6_7774221"  code_snippet_id="1811511" snippet_file_name="blog_20160805_6_7774221" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select sno as 编号,sname as 姓名,age as 年龄, saddress as 地址 from stud;&lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805125028098" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;strong&#62;&#60;span style="color:#ff0000"&#62;&#60;span style="font-size:14px"&#62;select 复杂查询:&#60;/span&#62;&#60;/span&#62;&#60;/strong&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#006600"&#62;&#60;span style="font-size:14px"&#62;查询stud表&#26684;中age大于等于24的：&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_7_2964672"  code_snippet_id="1811511" snippet_file_name="blog_20160805_7_2964672" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select * from stud where age&gt;=24;&lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805131413227" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#006600"&#62;&#60;span style="font-size:14px"&#62;查询stud表&#26684;中age大于等于20且下雨等于30的数据：&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_8_7283071"  code_snippet_id="1811511" snippet_file_name="blog_20160805_8_7283071" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select * from stud where age&gt;=20 and age &lt;=30;&lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805132153592" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#006600"&#62;&#60;span style="font-size:14px"&#62;还有一种方法：&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_9_1950134"  code_snippet_id="1811511" snippet_file_name="blog_20160805_9_1950134" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select * from stud where age between 20 and 30;&lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805132638625" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#009900"&#62;&#60;span style="font-size:14px"&#62;查询年龄等于20或者年龄等于30的stud表中的数据：&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="background-color:rgb(240,240,240)"&#62;&#60;span style="font-size:14px"&#62;select * from stud where age=20 or 30;&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805133109970" alt=""&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;还有一种方法：用 in();&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:rgb(0,153,0)"&#62;&#60;span style="font-size:14px"&#62;查询年龄为20，22和30的stud表中的数据:&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_10_8776787"  code_snippet_id="1811511" snippet_file_name="blog_20160805_10_8776787" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select * from stud where age in(20,22,30);&lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805140045027" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#33cc00"&#62;&#60;span style="font-size:14px"&#62;有一个和in相对的：not in&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_11_1143338"  code_snippet_id="1811511" snippet_file_name="blog_20160805_11_1143338" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select * from stud where age not in(20,22,30);&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805140548751" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#ff0000"&#62;&#60;span style="font-size:14px"&#62;模糊查询LIKE &nbsp;'%'匹配所有 &nbsp;'_'匹配单字符 &nbsp;---必须和LIKE共同使用:&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#ff0000"&#62;&#60;span style="font-size:14px"&#62;也就是说通配符只能在有like的情况下使用，如果是和=一起使用，那就只是普通的字符了。&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#33cc00"&#62;&#60;span style="font-size:14px"&#62;查询名字是张开头的：&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="background-color:rgb(240,240,240)"&#62;&#60;span style="font-size:14px"&#62;select * from stud where sname like '张%';&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805141445458" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:rgb(51,204,0)"&#62;&#60;span style="font-size:14px"&#62;查询名字张开头的，而且名字只有2个字符的：&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_12_1873687"  code_snippet_id="1811511" snippet_file_name="blog_20160805_12_1873687" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select * from stud where sname like &#39;张_&#39;;&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805143957784" alt=""&#62;&#60;br&#62;
+&#60;br&#62;
+&#60;/span&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#33cc00"&#62;&#60;span style="font-size:14px"&#62;查询名字张开头的，而且名字只有3个字符的：&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_13_4240238"  code_snippet_id="1811511" snippet_file_name="blog_20160805_13_4240238" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select * from stud where sname like &#39;张__&#39;;&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805144017985" alt=""&#62;&#60;br&#62;
+&#60;br&#62;
+&#60;/span&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#33cc00"&#62;&#60;span style="font-size:14px"&#62;查询名字中带有‘三’的:&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_14_3890790"  code_snippet_id="1811511" snippet_file_name="blog_20160805_14_3890790" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select * fom stud where sname like &#39;%三%&#39;;&lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805144748707" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:rgb(51,204,0)"&#62;&#60;span style="font-size:14px"&#62;查询名字中带有‘三’的而且年龄大于30的:&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_15_5700934"  code_snippet_id="1811511" snippet_file_name="blog_20160805_15_5700934" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select * from stud where sname like &#39;%三%&#39; and age &gt;30;&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;img src="http://img.blog.csdn.net/20160805144800097" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#ff0000"&#62;&#60;span style="font-size:14px"&#62;为表&#26684;增加一列：&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_16_1447792"  code_snippet_id="1811511" snippet_file_name="blog_20160805_16_1447792" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;alter table stud add column sex char(1);&lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;省略column 也可以添加&#60;/span&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_17_3257936"  code_snippet_id="1811511" snippet_file_name="blog_20160805_17_3257936" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;alter table stud add sex char(1);&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;img src="http://img.blog.csdn.net/20160805145437819" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#33cc00"&#62;&#60;span style="font-size:14px"&#62;从stud表&#26684;删除sex列&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_18_4893356"  code_snippet_id="1811511" snippet_file_name="blog_20160805_18_4893356" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;alter table stud drop sex;&lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;也可以用:&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_19_4751652"  code_snippet_id="1811511" snippet_file_name="blog_20160805_19_4751652" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;alter table stud drop column sex;&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#ff0000"&#62;&#60;span style="font-size:14px"&#62;判断NULL&#20540;时，不能用‘=’号判断，而是用is：&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;险插入一行数据，让他的age为null；&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805150456194" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_20_6387072"  code_snippet_id="1811511" snippet_file_name="blog_20160805_20_6387072" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;update stud set age=20 where age=null;&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;这一句是不起作用的，因为这个无法用来判断age是否为null。&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;应该用下面这句:&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_21_8753623"  code_snippet_id="1811511" snippet_file_name="blog_20160805_21_8753623" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;elect stud set age=20 where age is null;&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;作用是:如果stud表&#26684;中哪行的age为null，就设置age为20.&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805150943277" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;如果是判断哪个为空字符，就直接可以用='' &nbsp;来判断。&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;例:&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_22_2548634"  code_snippet_id="1811511" snippet_file_name="blog_20160805_22_2548634" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select * from stud where saddress=&#39;&#39;;&lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;作用是:如果stud表中有saddress为空(注意！是空，不是null),就查询显示出来。&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#ff0000"&#62;&#60;span style="font-size:14px"&#62;将saddress为纽约的改为硅谷&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_23_4184054"  code_snippet_id="1811511" snippet_file_name="blog_20160805_23_4184054" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;update stud set saddress=&#39;硅谷&#39; where saddress=&#39;纽约&#39;; &lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;注意:不是:这里不能写成 update table stud set...;&#60;/span&#62;&#60;/p&#62;
+&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805151541110" alt=""&#62;&#60;br&#62;
+&#60;br&#62;
+&#60;/span&#62;
+&#60;p&#62;&#60;span style="color:#ff0000"&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#ff0000"&#62;&#60;span style="font-size:14px"&#62;同时修改多个字段的&#20540;：&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_24_6027217"  code_snippet_id="1811511" snippet_file_name="blog_20160805_24_6027217" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;update stud set sname=&#39;ROSE&#39;, saddress=&#39;北京&#39; where sno=&#39;1002&#39;;&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805152925852" alt=""&#62;&#60;img src="http://img.blog.csdn.net/20160805152948320" alt=""&#62;&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#ff0000"&#62;&#60;span style="font-size:14px"&#62;删除名字是悟空的行：&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_25_5121362"  code_snippet_id="1811511" snippet_file_name="blog_20160805_25_5121362" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;delete from stud where sname=&#39;悟空&#39;;&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805154027731" alt=""&#62;&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;span style="color:#ff0000"&#62;&#60;br&#62;
+知识点：&#60;/span&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;select 字段 from 表名 where 条件 and 条件 or 条件&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;update tableName set 需要设置的&#20540; where 条件&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;delete from tableName where 条件&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#ff0000"&#62;&#60;span style="font-size:14px"&#62;创建视图:cerate view 视图名 as select 子句&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;（虚表）---只存在内存中&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;create view aview as select * from stud where age&gt;20;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="color:#ff0000"&#62;&#60;span style="font-size:14px"&#62;从视图aview中查询年龄小于40的sname,age,ano：&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_26_9439761"  code_snippet_id="1811511" snippet_file_name="blog_20160805_26_9439761" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select sname,sno,age from aview where age&lt;40;&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805155450232" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#ff0000"&#62;&#60;strong&#62;聚合函数:&#60;/strong&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#ff0000"&#62;&#60;strong&#62;&#60;br&#62;
+&#60;/strong&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#33cc00"&#62;统计非null数据的行数：（*号和1 代表只要表中一行有非null的列数据，这一行就是非null）&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#33cc00"&#62;一般要专门给个别用: as 别名&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_27_5710007"  code_snippet_id="1811511" snippet_file_name="blog_20160805_27_5710007" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select count(*) from stud;
+select count(1) from stud;&lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805160806228" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#33ff33"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#33ff33"&#62;统计age不为空的行数:&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;也就是age为null就不会被统计进去。&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_28_3093068"  code_snippet_id="1811511" snippet_file_name="blog_20160805_28_3093068" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select count(age) from stud;&lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805161054760" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#33cc00"&#62;显示出stud表中所有age的平均&#20540;：&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_29_2951364"  code_snippet_id="1811511" snippet_file_name="blog_20160805_29_2951364" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select avg(age) as averageAge from stud;&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805161646419" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#33cc00"&#62;显示所有age平均&#20540;的四舍五入。&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_30_93662"  code_snippet_id="1811511" snippet_file_name="blog_20160805_30_93662" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select round(avg(age)) as averageAge2 from stud;&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805162120045" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#ff0000"&#62;还有：&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;span style="color:#ff0000"&#62;Sum求和。&#60;br&#62;
+Max求最大&#20540;，&#60;br&#62;
+Min求最小&#20540;。&#60;/span&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_31_1903806"  code_snippet_id="1811511" snippet_file_name="blog_20160805_31_1903806" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select  sum(age)  as sunAge from stud;
+select max(age) as maxAge from stud;
+select min(age) as minAge from stud;&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;img src="http://img.blog.csdn.net/20160805162629344" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#ff0000"&#62;选择年龄最小的那个人的名字和年龄：&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_32_5665796"  code_snippet_id="1811511" snippet_file_name="blog_20160805_32_5665796" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select sname , age from stud where age = ( selectt min(age) from stud );&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;这样用in也可以:&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_33_1097011"  code_snippet_id="1811511" snippet_file_name="blog_20160805_33_1097011" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select sname ,age from stud where age in(select min(age) from stud);&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805163104534" alt=""&#62;&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;再创建一个年龄等于10的行：&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_34_1270951"  code_snippet_id="1811511" snippet_file_name="blog_20160805_34_1270951" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;insert into stud value(&#39;1009&#39;,&#39;李白&#39;,10,&#39;湖南&#39;);&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px; color:#ff0000"&#62;再查年龄最小的那个人的年龄:&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_35_8654011"  code_snippet_id="1811511" snippet_file_name="blog_20160805_35_8654011" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select age from stud where age=(select min(age) from stud);&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805163510193" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#cc66cc"&#62;我们可以看到，因为有2个数据的年龄都是最小&#20540;，所有显示了2行，但是它们是重复的，完全没必要显示2行。&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#cc66cc"&#62;这个时候我们就要用到：distinct ,把完全相同的行，合并显示！&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_36_1336208"  code_snippet_id="1811511" snippet_file_name="blog_20160805_36_1336208" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select distinct age from stud where age = (select min(age) from stud);&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;img src="http://img.blog.csdn.net/20160805163834302" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#ff0000"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#ff0000"&#62;排序-升序和降序：&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#33cc00"&#62;按年龄升序排：&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_37_3146351"  code_snippet_id="1811511" snippet_file_name="blog_20160805_37_3146351" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select * from stud order by age asc;&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805165650706" alt=""&#62;&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#009900"&#62;按年龄降序排:&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_38_8544545"  code_snippet_id="1811511" snippet_file_name="blog_20160805_38_8544545" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select sno,sname,age from stud order by age desc;&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805165904552" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#ff0000"&#62;exists存在判断&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_39_7115302"  code_snippet_id="1811511" snippet_file_name="blog_20160805_39_7115302" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select sname,age from stud where exists (select * from stud where age = 20);&lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#3333ff"&#62;exists (select * from stud where age=20) ---只要存在age=20的，就返回true、&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#3333ff"&#62;也就是exists(...) 是判断括号内的表达式是不是null的，如果是null则返回false，否则返回true；&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#3333ff"&#62;此句因为stud存在age=20的行，所以会输出所有的sname，age。&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805170731893" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#ff0000"&#62;分组 &nbsp;group by&nbsp;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_40_7878670"  code_snippet_id="1811511" snippet_file_name="blog_20160805_40_7878670" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select saddress , avg(age) as 平均年龄 from stud group by saddress;&lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#3333ff"&#62;按照saddress来分组,求出每组的平均年龄。&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;只要saddress不同就是不同的组！&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805171137477" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#ff0000"&#62;按照saddress分组后每组的年龄总和：&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#3333ff"&#62;select saddress,sum(age) as 年龄总和 from stud group by saddress;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805171705305" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;有2个固定搭配：&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;排序:&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;select ... from ... where ... order by ... &nbsp;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;分组:&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;select ... from ... group by ... by ... having ... (条件判断在having后面，不是用where)&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805172125322" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;这里的sum(age)也可以用as 别名 &nbsp;取一个别用，在判断的时候直接可以用别名的。&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#ff0000"&#62;字符串处理函数&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_41_6133783"  code_snippet_id="1811511" snippet_file_name="blog_20160805_41_6133783" name="code" class="sql"&#62;&lt;pre name=&quot;code&quot; class=&quot;sql&quot;&gt;&lt;span style=&quot;font-size:14px;&quot;&gt;Length(str) － 求字符串长度
+Ltrim(str) － 去掉左边的空格
+Rtrim(str) － 去掉右边的空格
+trim(str)  - 去掉两边的空格
+Left(str,n); － 从左边取出n个字符
+Right(str,n); － 从右边取出n个字符
+Substring(str,begin,end) －返回子串
+Reverse(str) –返回颠倒的字符串
+Lower(str) － 转成小写
+Upper(str) － 转成大写
+Concat(Str,str…..)串联字符串。
+Instr(str,s) – 返回s在str中出面的位置，没有则返回0&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre&#62;&#60;/pre&#62;
+&#60;span style="font-size:14px"&#62;这里就只选取几个来演示了：&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#33cc00"&#62;演示left();&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;显示saddress开始2个字符为湖南的行&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_42_7943927"  code_snippet_id="1811511" snippet_file_name="blog_20160805_42_7943927" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select * from stud where left(saddress,2)=&#39;湖南&#39;;&lt;/span&gt;&#60;/pre&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805173033826" alt=""&#62;&#60;/span&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#ff0000"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#ff0000"&#62;串联字符串：&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;pre code_snippet_id="1811511" snippet_file_name="blog_20160805_43_2676247"  code_snippet_id="1811511" snippet_file_name="blog_20160805_43_2676247" name="code" class="sql"&#62;&lt;span style=&quot;font-size:14px;&quot;&gt;select concat(snon,sname,saddress) as 串联字符串 from stud;&lt;/span&gt;&#60;/pre&#62;
+&#60;p&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805173801547" alt=""&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#ff0000"&#62;instr(str,s) 返回s在str中出面的位置，没有则返回0&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px; color:#ff0000"&#62;其实就是返回字串自一次出现的位置(从1开始计数)&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="background-color:rgb(240,240,240)"&#62;&#60;span style="font-size:14px"&#62;select sname,instr(sname,'三') as ind from stud;'&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;img src="http://img.blog.csdn.net/20160805174134783" alt=""&#62;&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;&#60;br&#62;
+&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;本篇博客适于初学SQL的朋友学习，如果想继续学习，请关注我，我会在后续继续加深SQL~&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span style="font-size:14px"&#62;因博主也是刚刚开始学习SQL语句，让我们一起进步吧~&#60;/span&#62;&#60;/p&#62;
+&#60;p&#62;&#60;span class="wmd-input-section" style="color:rgb(90,90,90); font-family:'microsoft yahei'; font-size:18px; line-height:29.7px; white-space:pre-wrap; outline:none!important"&#62;&#60;span class="token p" style="outline:none!important"&#62;&#60;span class="token img" style="outline:none!important; padding:0.2em 0px 0.2em 0.4em"&#62;&#60;span class="token md img-parens" style="outline:none!important"&#62;&#60;span class="token md md-paren-end" style="outline:none!important"&#62;&#60;/span&#62;&#60;/span&#62;&#60;/span&#62;&#60;/span&#62;&#60;/span&#62;&#60;/p&#62;

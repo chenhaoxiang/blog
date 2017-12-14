@@ -1,0 +1,54 @@
+---
+layout: post
+title: "【Cocos2d-x】Cocos2d-X网络编程-CURL使用入门"
+date: 2017-05-31 18:38:54 +0800
+comments: true
+categories: C++
+tags: [C++, basis]
+keyword: 陈浩翔, 谙忆, C++, CURL使用入门 ,Cocos2d-X网络编程
+description: 
+---
+
+因为现在已经在实习了，公司也没给什么时间去学习cocos2dx，所以只能边做公司的需求边学习
+
+<!-- more -->
+----------
+
+#1.如何使用post方式提交数据  
+```
+	//POST方式
+	auto postReq = new HttpRequest();
+	postReq->setUrl("http://httpbin.org/post");//设置请求网址
+	postReq->setRequestType(HttpRequest::Type::POST);//设置请求类型
+	//设置请求的数据
+	const char* reqData = "controller=cocos2d%action=testHttpPost";
+	postReq->setRequestData(reqData, strlen(reqData));
+```
+
+其他步骤请参考前面的[【Cocos2d-x】Cocos2d-X网络编程-HttpRequest/HttpClient/HttpResponse]博文
+
+#2.如何区别不同的请求  
+当同时发送多个请求的时候，如何区分不同的请求！  
+
+可以设置不同的回调函数，也可以在发送请求时设置tag，在回调函数里面获取请求的tag
+
+#3.设置Content-Type  
+Content-Type，内容类型。用于定义网络文件的类型和网页的编码，决定浏览器将以什么形式，什么编码读取这个文件。  
+  设置格式： Content-Type:application/json;charset=utf-8  如果未指定ContentType，默认为TEXT/HTML  
+
+
+
+#4.sendlmmediate和send的区别  
+
+#完整源代码下载地址：
+<blockquote cite='陈浩翔'>
+GITHUB源码下载地址:<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>点我进行下载</a>】</strong></p>
+</blockquote>
+
+
+本文章由<a href="http://chenhaoxiang.cn/">[谙忆]</a>编写， 所有权利保留。 
+欢迎转载，分享是进步的源泉。
+<blockquote cite='陈浩翔'>
+<p background-color='#D3D3D3'>转载请注明出处：<a href='http://chenhaoxiang.cn'><font color="green">http://chenhaoxiang.cn</font></a><br><br>
+本文源自<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>人生之旅_谙忆的博客</a>】</strong></p>
+</blockquote>

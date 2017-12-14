@@ -1,0 +1,120 @@
+---
+layout: post
+title: "按钮被点击后屏蔽点击且倒计时60S能再次被点击-JS实现和JQuery实现"
+date: 2016-10-02 11:57:17 +0800
+comments: true
+categories:❷ Java大学之行,----- ⑥、框架/第三方工具
+tags: [jquery,验证码,手机,博客]
+keyword: 陈浩翔, 谙忆
+description: 转载请注明出处：http://blog.csdn.net/qq_26525215
+本文源自【大学之旅_谙忆的博客】
+
+
+这个主要是用在手机验证码注册的时候用的多， 
+比如:
+
+
+
+正如上图所示那样-60S后还会还原、 
+直接上代码:
+
+type="button" id='codeBtn' value="免费获取验证码">
+"js/reg.js">
+//(我是分开写的--后面的代码我是导入的)
+va 
+---
+
+
+转载请注明出处：http://blog.csdn.net/qq_26525215
+本文源自【大学之旅_谙忆的博客】
+
+
+这个主要是用在手机验证码注册的时候用的多， 
+比如:
+
+
+
+正如上图所示那样-60S后还会还原、 
+直接上代码:
+
+type="button" id='codeBtn' value="免费获取验证码"&#62;
+"js/reg.js"&#62;
+//(我是分开写的--后面的代码我是导入的)
+va
+&#60;!-- more --&#62;
+----------
+
+&#60;blockquote cite='陈浩翔'&#62;
+&#60;p background-color='#D3D3D3'&#62;转载请注明出处：&#60;a href='http://blog.csdn.net/qq_26525215'&#62;&#60;font color="green"&#62;http://blog.csdn.net/qq_26525215&#60;/font&#62;&#60;/a&#62;&#60;br&#62;&#60;br&#62;
+本文源自&#60;strong&#62;【&#60;a href='http://blog.csdn.net/qq_26525215' target='_blank'&#62;大学之旅_谙忆的博客&#60;/a&#62;】&#60;/strong&#62;&#60;/p&#62;
+&#60;/blockquote&#62;
+
+这个主要是用在手机验证码注册的时候用的多，
+比如:
+
+![](http://img.blog.csdn.net/20160916170309222)
+
+正如上图所示那样-60S后还会还原、
+直接上代码:
+
+
+```
+&#60;input type="button" id='codeBtn' value="免费获取验证码"&#62;&#60;/input&#62;
+&#60;script src="js/reg.js"&#62;&#60;/script&#62;
+//(我是分开写的--后面的代码我是导入的)
+var wait = 60;
+function time(btn) {
+	if(wait == 0) {
+		btn.removeAttribute("disabled");
+		btn.value = "免费获取验证码";
+		wait = 60;
+	} else {
+		btn.setAttribute("disabled", true);
+		btn.value = "重新发送(" + wait + ")";
+		wait--;
+		setTimeout(function() {
+				time(btn)
+			},
+			1000)
+	}
+}
+document.getElementById("codeBtn").onclick = function() {
+	time(this);
+}
+```
+
+
+JQuery代码实现:
+
+```
+&#60;input type="button" id="btn" value="免费获取验证码" /&#62;
+
+//(我是分开写的--后面的代码我是导入的)
+
+$(function() {
+    $(function() {
+        $("#btn").click(settime);
+    });
+});
+var countdown = 60;
+function settime() {
+    if(countdown == 0) {
+        $("#btn").attr("disabled", false);
+        $("#btn").attr("value", "免费获取验证码");
+        countdown = 60;
+    } else {
+        $("#btn").attr("disabled", true);
+        $("#btn").attr("value", "重新发送(" + countdown + ")");
+        countdown--;
+	    setTimeout(settime, 1000)
+    }
+}
+
+```
+
+
+本文章由&#60;a href="https://chenhaoxiang.github.io/"&#62;[谙忆]&#60;/a&#62;编写， 所有权利保留。 
+&#60;blockquote cite='陈浩翔'&#62;
+&#60;p background-color='#D3D3D3'&#62;转载请注明出处：&#60;a href='http://blog.csdn.net/qq_26525215'&#62;&#60;font color="green"&#62;http://blog.csdn.net/qq_26525215&#60;/font&#62;&#60;/a&#62;&#60;br&#62;&#60;br&#62;
+本文源自&#60;strong&#62;【&#60;a href='http://blog.csdn.net/qq_26525215' target='_blank'&#62;大学之旅_谙忆的博客&#60;/a&#62;】&#60;/strong&#62;&#60;/p&#62;
+&#60;/blockquote&#62;

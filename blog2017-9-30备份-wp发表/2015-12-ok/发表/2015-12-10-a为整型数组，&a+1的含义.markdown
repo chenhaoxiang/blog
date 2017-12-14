@@ -1,0 +1,54 @@
+---
+layout: post
+title: "a为整型数组，&a+1的含义"
+date: 2015-12-10 01:52:11 +0800
+comments: true
+categories:❸ C/C++,----- C语言指针
+tags: []
+keyword: 陈浩翔, 谙忆
+description: #include <stdio.h>int main()
+{
+    int a[10];    printf("a的值为：\t%d\n",a);
+    printf("&a的值为：\t%d\n",&a);
+    printf("a+1的值为：\t%d\n",a+1);
+    printf("&a+1的值为：\t%d\n",&a+1);
+    /**把int a[10]变下形，为：int * 
+---
+
+
+#include &#60;stdio.h&#62;int main()
+{
+    int a[10];    printf("a的值为：\t%d\n",a);
+    printf("&a的值为：\t%d\n",&a);
+    printf("a+1的值为：\t%d\n",a+1);
+    printf("&a+1的值为：\t%d\n",&a+1);
+    /**把int a[10]变下形，为：int *
+&#60;!-- more --&#62;
+----------
+
+
+
+```cpp
+#include &#60;stdio.h&#62;
+
+int main()
+{
+    int a[10];
+
+    printf("a的值为：\t%d\n",a);
+    printf("&a的值为：\t%d\n",&a);
+
+
+    printf("a+1的值为：\t%d\n",a+1);
+    printf("&a+1的值为：\t%d\n",&a+1);
+    /**把int a[10]变下形，为：int *(&a)[10]，这样就可以直观的看出
+        来，&a就相当于指向一个int [10]类型的指针变量，于是&a到&a+1的变化
+        就是它指向的变量所占用的内存单元的大小4*10字节=40字节
+    **/
+
+    return 0;
+}
+
+```
+**运行结果：**
+![](http://img.blog.csdn.net/20151210135124157)

@@ -1,0 +1,95 @@
+---
+layout: post
+title: "HDOJ 2052  Picture"
+date: 2016-01-27 03:51:37 +0800
+comments: true
+categories:❶ ACM,----- HDOJ-JAVA
+tags: [numbers]
+keyword: 陈浩翔, 谙忆
+description: Problem Description 
+Give you the width and height of the rectangle,darw it.Input 
+Input contains a number of test cases.For each case ,there are two numbers n and m (0 < n,m < 75)indicate the width an 
+---
+
+
+Problem Description 
+Give you the width and height of the rectangle,darw it.Input 
+Input contains a number of test cases.For each case ,there are two numbers n and m (0 &#60; n,m &#60; 75)indicate the width an
+&#60;!-- more --&#62;
+----------
+
+Problem Description
+Give you the width and height of the rectangle,darw it.
+ 
+
+Input
+Input contains a number of test cases.For each case ,there are two numbers n and m (0 &#60; n,m &#60; 75)indicate the width and height of the rectangle.Iuput ends of EOF.
+ 
+
+Output
+For each case,you should draw a rectangle with the width and height giving in the input.
+after each case, you should a blank line. 
+ 
+
+Sample Input
+3 2
+ 
+
+```
+Sample Output
++---+
+|   |
+|   |
++---+
+```
+
+
+
+别忘了每一个输出后面空一行
+
+```java
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		while(sc.hasNext()){
+			int m = sc.nextInt();
+			int n = sc.nextInt();
+			
+			for(int i=0;i&#60;n+2;i++){
+				
+				for(int j=0;j&#60;m+2;j++){
+					if(i==0){
+						if(j==0||j==m+1){
+							System.out.print("+");
+						}else{
+							System.out.print("-");
+						}
+					}else if(i==n+1){
+						if(j==0||j==m+1){
+							System.out.print("+");
+						}else{
+							System.out.print("-");
+						}
+					}else {
+						if(j==0||j==m+1){
+							System.out.print("|");
+						}else{
+							System.out.print(" ");
+						}
+					}
+				}
+				System.out.println();
+			}
+			System.out.println();
+			
+		}
+		
+		
+	}
+
+}
+
+```

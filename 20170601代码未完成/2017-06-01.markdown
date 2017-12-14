@@ -1,0 +1,159 @@
+---
+layout: post
+title: "【Cocos2d-x】Cocos2d-X网络编程-使用post方式提交数据和设置请求参数"
+date: 2017-05-31 18:38:54 +0800
+comments: true
+categories: C++
+tags: [C++, basis]
+keyword: 陈浩翔, 谙忆, C++, Cocos2d-x ,Cocos2d-X网络编程
+description: 
+---
+
+本篇博客内容:  
+1.如何使用post方式提交数据  
+2.如何区别不同的请求  
+3.设置Content-Type  
+4.sendlmmediate和send的区别  	
+
+<!-- more -->
+----------
+
+#1.如何使用post方式提交数据  
+```C++ 创建对象
+	//POST方式
+	auto postReq = new HttpRequest();
+	postReq->setUrl("http://httpbin.org/post");//设置请求网址
+	postReq->setRequestType(HttpRequest::Type::POST);//设置请求类型
+	//设置请求的数据
+	const char* reqData = "controller=cocos2d%action=testHttpPost";
+	postReq->setRequestData(reqData, strlen(reqData));
+```
+
+回调函数:
+```C++ 实现回调函数
+//实现回调函数
+void HelloWorld::complete(HttpClient *client, HttpResponse *response){
+	//使用HttpResponse类的相关函数，获取状态和数据
+	log("response code is:%d",response->getResponseCode());//获取请求返回的状态码
+
+	log("request tag is: %s", response->getHttpRequest()->getTag());//获取请求的tag，用来区分不同的请求
+	if (response->isSucceed()){//判断返回是否成功  成功就返回true
+		//把数据输出到字符串 方式1
+		//std::vector<char> * data = response->getResponseData();
+		//std::string str1 ;
+
+		//log("response data is:");
+		//
+		//for (int i = 0; i < data->size(); i++){
+		//	str1 = str1 + (*data)[i];
+		//	//log("%c",(*data)[i]);
+		////	//因为data是一个指针，所以需要取内容操作符，(*data)这样获取的就是数组的首地址，然后再加上角标
+		//}
+		//log(str1.c_str());
+
+		//把数据输出到数据流 方式2
+		std::vector<char> * data = response->getResponseData();
+		std::stringstream oss;
+		for (int i = 0; i < data->size(); i++){
+			oss << (*data)[i];
+		}
+		std::string str = oss.str();
+		log("response data is: %s",str.c_str());
+	}
+	else{
+		log("error msg is:%s", response->getErrorBuffer()); // getErrorBuffer-会返回请求数据错误的信息
+	}
+
+}
+```
+
+其他步骤请参考前面的[<a href='http://chenhaoxiang.cn' target='_blank'>【Cocos2d-x】Cocos2d-X网络编程-HttpRequest/HttpClient/HttpResponse</a>]博文
+
+#2.如何区别不同的请求  
+当同时发送多个请求的时候，如何区分不同的请求！  
+
+可以设置不同的回调函数，也可以在发送请求时设置tag，在回调函数里面获取请求的tag
+
+通过设置tag:
+```
+request->setTag("get");
+>post方式一样可以设置
+postReq->setTag("post");
+```
+
+#3.设置Content-Type  
+Content-Type，内容类型。用于定义网络文件的类型和网页的编码，决定浏览器将以什么形式，什么编码读取这个文件。  
+  设置格式： Content-Type:application/json;charset=utf-8  如果未指定ContentType，默认为TEXT/HTML  
+
+实例中未设置Content-Type时的post形式输出：  
+```
+response code is:200
+request tag is: post
+response data is: {
+  "args": {}, 
+  "data": "", 
+  "files": {}, 
+  "form": {
+    "controller": "cocos2d\ufffdtion=testHttpPost"
+  }, 
+  "headers": {
+    "Accept": "*/*", 
+    "Accept-Encoding": "deflate, gzip", 
+    "Connection": "close", 
+    "Content-Length": "38", 
+    "Content-Type": "application/x-www-form-urlencoded", 
+    "Host": "httpbin.org"
+  }, 
+  "json": null, 
+  "origin": "118.248.44.167", 
+  "url": "http://httpbin.org/post"
+}
+```
+
+```
+	//设置设置Content-Type START
+	std::vector<std::string> header;
+	header.push_back("Content-Type:application/json;charset=utf-8");
+	postReq->setHeaders(header);
+	///////// END
+```
+
+设置了上面代码Content-Type之后的输出:
+```
+response code is:200
+request tag is: post
+response data is: {
+  "args": {}, 
+  "data": "controller=cocos2d%action=testHttpPost", 
+  "files": {}, 
+  "form": {}, 
+  "headers": {
+    "Accept": "*/*", 
+    "Accept-Encoding": "deflate, gzip", 
+    "Connection": "close", 
+    "Content-Length": "38", 
+    "Content-Type": "application/json;charset=utf-8", 
+    "Host": "httpbin.org"
+  }, 
+  "json": null, 
+  "origin": "118.248.44.167", 
+  "url": "http://httpbin.org/post"
+}
+```
+
+
+
+#4.sendlmmediate和send的区别  
+
+#完整源代码下载地址：
+<blockquote cite='陈浩翔'>
+GITHUB源码下载地址:<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>点我进行下载</a>】</strong></p>
+</blockquote>
+
+
+本文章由<a href="http://chenhaoxiang.cn/">[谙忆]</a>编写， 所有权利保留。 
+欢迎转载，分享是进步的源泉。
+<blockquote cite='陈浩翔'>
+<p background-color='#D3D3D3'>转载请注明出处：<a href='http://chenhaoxiang.cn'><font color="green">http://chenhaoxiang.cn</font></a><br><br>
+本文源自<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>人生之旅_谙忆的博客</a>】</strong></p>
+</blockquote>

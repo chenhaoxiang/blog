@@ -1,0 +1,58 @@
+---
+layout: post
+title: "递归简论"
+date: 2015-08-26 04:12:09 +0800
+comments: true
+categories:❸ C/C++,----- 数据结构,❺ 算法及基础题,----- 递归搜索回溯
+tags: [递归]
+keyword: 陈浩翔, 谙忆
+description: /**f(x)=2f(x-1)+x^2;f(0)=0;**/
+#include <stdio.h>
+#include <stdlib.h>
+int f(unsigned int x)
+{
+    if(x==0)
+        return 0;//处理基准情况
+    //基准情形：你必须总要有某些基准的情形，它们不用递归就能求解
+    else
+        return 2*f(x-1) 
+---
+
+
+/**f(x)=2f(x-1)+x^2;f(0)=0;**/
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;
+int f(unsigned int x)
+{
+    if(x==0)
+        return 0;//处理基准情况
+    //基准情形：你必须总要有某些基准的情形，它们不用递归就能求解
+    else
+        return 2*f(x-1)
+&#60;!-- more --&#62;
+----------
+
+```
+/**f(x)=2f(x-1)+x^2;f(0)=0;**/
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;
+int f(unsigned int x)
+{
+    if(x==0)
+        return 0;//处理基准情况
+    //基准情形：你必须总要有某些基准的情形，它们不用递归就能求解
+    else
+        return 2*f(x-1)+x*x;
+    //不断推进：对于那些需要递归求解的情形，递归调用必须总能够朝着产生基准情形的方向推进
+}
+int main()
+{
+    unsigned int n;
+    while(~scanf("%d",&n))
+    {
+        printf("%u\n",f(n));
+    }
+    return 0;
+}
+
+```

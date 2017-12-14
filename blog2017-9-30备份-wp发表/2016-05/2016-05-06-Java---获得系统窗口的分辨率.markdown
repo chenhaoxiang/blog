@@ -1,0 +1,38 @@
+---
+layout: post
+title: "Java---获得系统窗口的分辨率"
+date: 2016-05-06 06:34:07 +0800
+comments: true
+categories:❷ Java大学之行,----- ③、Java知识点及应用
+tags: []
+keyword: 陈浩翔, 谙忆
+description: //获得系统屏幕分辨率
+//得到当前屏幕的分辨率：Toolkit.getDafaultToolkit().getScreenSize()Toolkit t = Toolkit.getDefaultToolkit() ;
+Dimension size=t.getScreenSize(); 
+//如果系统屏幕分辨率是1024*768时，
+//size.getWidth()的值为1024
+//size.g 
+---
+
+
+//获得系统屏幕分辨率
+//得到当前屏幕的分辨率：Toolkit.getDafaultToolkit().getScreenSize()Toolkit t = Toolkit.getDefaultToolkit() ;
+Dimension size=t.getScreenSize(); 
+//如果系统屏幕分辨率是1024*768时，
+//size.getWidth()的值为1024
+//size.g
+&#60;!-- more --&#62;
+----------
+
+```
+//获得系统屏幕分辨率
+//得到当前屏幕的分辨率：Toolkit.getDafaultToolkit().getScreenSize()
+
+Toolkit t = Toolkit.getDefaultToolkit() ;
+Dimension size=t.getScreenSize(); 
+
+
+//如果系统屏幕分辨率是1024*768时，
+//size.getWidth()的值为1024
+//size.getHeight()的值为768。
+```

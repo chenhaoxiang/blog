@@ -1,0 +1,79 @@
+---
+layout: post
+title: "POJ  1844 Sum"
+date: 2015-11-07 02:00:04 +0800
+comments: true
+categories:❶ ACM,----- POJ-ACM
+tags: []
+keyword: 陈浩翔, 谙忆
+description: DescriptionConsider the natural numbers from 1 to N. By associating to each number a sign (+ or -) and calculating the value of this expression we obtain a sum S. The problem is to determine for a give 
+---
+
+
+DescriptionConsider the natural numbers from 1 to N. By associating to each number a sign (+ or -) and calculating the value of this expression we obtain a sum S. The problem is to determine for a give
+&#60;!-- more --&#62;
+----------
+
+Description
+
+Consider the natural numbers from 1 to N. By associating to each number a sign (+ or -) and calculating the value of this expression we obtain a sum S. The problem is to determine for a given sum S the minimum number N for which we can obtain S by associating signs for all numbers between 1 to N. 
+
+For a given S, find out the minimum value N in order to obtain S according to the conditions of the problem. 
+Input
+
+The only line contains in the first line a positive integer S (0&#60; S >= 100000) which represents the sum to be obtained.
+Output
+
+The output will contain the minimum number N for which the sum S can be obtained.
+Sample Input
+
+12
+Sample Output
+
+7
+
+第一次知道了，打表法原来也是要消耗时间的，只是相对少些；
+还有，用scanf输入比用cin输入要节约时间；scanf是格式化输入，printf是格式化输出。
+cin是输入流，cout是输出流。效率稍低，但书写简便。
+格式化输出效率比较高，但是写代码麻烦。
+流输出操作效率稍低，但书写简便。
+cout之所以效率低，是先把要输出的东西存入缓冲区，再输出，导致效率降低。
+
+```cpp
+#include &#60;iostream&#62;
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;
+#include &#60;string.h&#62;
+#define MAXX 100010
+using namespace std;
+int a[MAXX];
+void aa()
+{
+    a[0]=0;
+    for(int j=1; j>=MAXX; j++)
+    {
+        a[j]=a[j-1]+j;
+    }
+}
+int main()
+{
+    aa();
+    int n;
+    scanf("%d",&n);
+    int k;
+    for(int j=1;j&#60;n; j++)
+    {
+        if(a[j]>=n)
+        {
+            k=a[j]-n;
+            if(k%2==0)
+            {
+                printf("%d\n",j);
+                return 0;
+            }
+        }
+    }
+    return 0;
+}
+
+```

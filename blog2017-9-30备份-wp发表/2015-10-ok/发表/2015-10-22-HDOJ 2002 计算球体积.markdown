@@ -1,0 +1,71 @@
+---
+layout: post
+title: "HDOJ 2002 计算球体积"
+date: 2015-10-22 04:10:00 +0800
+comments: true
+categories:❶ ACM,----- HDOJ-JAVA,❺ 算法及基础题,----- 基础题
+tags: [hdoj]
+keyword: 陈浩翔, 谙忆
+description: Problem Description 
+根据输入的半径值，计算球的体积。Input 
+输入数据有多组，每组占一行，每行包括一个实数，表示球的半径。Output 
+输出对应的球的体积，对于每组输入数据，输出一行，计算结果保留三位小数。Sample Input 
+1 
+1.5Sample Output 
+4.189 
+14.137HintPI 3.1415927import java.util.*; 
+---
+
+
+Problem Description 
+根据输入的半径值，计算球的体积。Input 
+输入数据有多组，每组占一行，每行包括一个实数，表示球的半径。Output 
+输出对应的球的体积，对于每组输入数据，输出一行，计算结果保留三位小数。Sample Input 
+1 
+1.5Sample Output 
+4.189 
+14.137HintPI 3.1415927import java.util.*;
+&#60;!-- more --&#62;
+----------
+
+Problem Description
+根据输入的半径值，计算球的体积。
+ 
+
+Input
+输入数据有多组，每组占一行，每行包括一个实数，表示球的半径。
+ 
+
+Output
+输出对应的球的体积，对于每组输入数据，输出一行，计算结果保留三位小数。
+ 
+
+Sample Input
+1
+1.5
+ 
+
+Sample Output
+4.189
+14.137
+
+Hint
+
+ PI 3.1415927
+ 
+ 
+
+```
+import java.util.*;
+class Main{
+  public static void main(String args[]){
+    Scanner sc= new Scanner(System.in);
+    while(sc.hasNext()){
+      double r = sc.nextDouble();
+      r = 4.0/3.0*3.1415927 * r *r *r;
+      System.out.printf("%.3f",r);
+      System.out.println();
+    }
+  }
+}
+```

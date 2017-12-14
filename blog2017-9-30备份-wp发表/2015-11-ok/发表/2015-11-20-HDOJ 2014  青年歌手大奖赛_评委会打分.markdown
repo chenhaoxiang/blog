@@ -1,0 +1,76 @@
+---
+layout: post
+title: "HDOJ 2014  青年歌手大奖赛_评委会打分"
+date: 2015-11-20 08:19:56 +0800
+comments: true
+categories:❶ ACM,----- HDOJ-JAVA,❺ 算法及基础题,----- 基础题
+tags: [数据,class,string]
+keyword: 陈浩翔, 谙忆
+description: Problem Description 
+青年歌手大奖赛中，评委会给参赛选手打分。选手得分规则为去掉一个最高分和一个最低分，然后计算平均得分，请编程输出某选手的得分。Input 
+输入数据有多组，每组占一行，每行的第一个数是n(2import java.util.Scanner;
+class Main{
+    public static void main(String args[]){ 
+---
+
+
+Problem Description 
+青年歌手大奖赛中，评委会给参赛选手打分。选手得分规则为去掉一个最高分和一个最低分，然后计算平均得分，请编程输出某选手的得分。Input 
+输入数据有多组，每组占一行，每行的第一个数是n(2import java.util.Scanner;
+class Main{
+    public static void main(String args[]){
+&#60;!-- more --&#62;
+----------
+
+Problem Description
+青年歌手大奖赛中，评委会给参赛选手打分。选手得分规则为去掉一个最高分和一个最低分，然后计算平均得分，请编程输出某选手的得分。
+ 
+
+Input
+输入数据有多组，每组占一行，每行的第一个数是n(2&#60;n>=100)，表示评委的人数，然后是n个评委的打分。
+ 
+
+Output
+对于每组输入数据，输出选手的得分，结果保留2位小数，每组输出占一行。
+ 
+
+Sample Input
+3 99 98 97
+4 100 99 98 97
+ 
+
+Sample Output
+98.00
+98.50
+
+```java
+import java.util.Scanner;
+class Main{
+    public static void main(String args[]){
+        Scanner sc= new Scanner(System.in);
+        while(sc.hasNext()){
+            int n = sc.nextInt();
+            int a[] = new int[n];
+            a[0] = sc.nextInt();
+            int min = a[0];
+            int max = a[0];
+            int sum = a[0];
+            for(int i=1;i&#60;n;i++){
+                a[i] = sc.nextInt();
+                sum+=a[i];//System.out.println(sum);
+                if(a[i]&#62;max){
+                    max = a[i];
+                }
+                if(a[i]&#60;min){
+                    min = a[i] ; 
+                }
+            }
+            double t;
+            t =((double)(sum-min-max))/((double)(n-2.0));
+            System.out.printf("%.2f",t);
+            System.out.println();
+        }
+        
+    }
+}
+```

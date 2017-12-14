@@ -1,0 +1,95 @@
+---
+layout: post
+title: "HDOJ 1008 Elevator"
+date: 2016-03-18 06:51:22 +0800
+comments: true
+categories:❶ ACM,----- HDOJ-JAVA,❺ 算法及基础题,----- 基础题
+tags: [acm,java]
+keyword: 陈浩翔, 谙忆
+description: Problem Description 
+The highest building in our city has only one elevator. A request list is made up with N positive numbers. The numbers denote at which floors the elevator will stop, in specified o 
+---
+
+
+Problem Description 
+The highest building in our city has only one elevator. A request list is made up with N positive numbers. The numbers denote at which floors the elevator will stop, in specified o
+&#60;!-- more --&#62;
+----------
+
+**Problem Description**
+The highest building in our city has only one elevator. A request list is made up with N positive numbers. The numbers denote at which floors the elevator will stop, in specified order. It costs 6 seconds to move the elevator up one floor, and 4 seconds to move down one floor. The elevator will stay for 5 seconds at each stop.
+
+For a given request list, you are to compute the total time spent to fulfill the requests on the list. The elevator is on the 0th floor at the beginning and does not have to return to the ground floor when the requests are fulfilled.
+
+ 
+
+**Input**
+There are multiple test cases. Each case contains a positive integer N, followed by N positive numbers. All the numbers in the input are less than 100. A test case with N = 0 denotes the end of input. This test case is not to be processed.
+
+ 
+
+**Output**
+Print the total time on a single line for each test case. 
+
+ 
+
+**Sample Input**
+1 2
+3 2 3 1
+0
+ 
+
+**Sample Output**
+17
+41
+
+
+水题！
+电梯层数是可以输入重复的，并且重复的层数必须加5秒。
+大概题意：
+坐电梯，输入一个数n，接着是n个数，代表着楼层。
+然后电梯从0层出发，上楼每层需要6s，下楼每层需要4秒，每到一层需要
+停留5秒，问最后到达第（n个数）层后需要一共多少秒。最后的那层也要停留5秒才算。
+
+```java
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		while(sc.hasNext()){
+			int n=sc.nextInt();
+			if(n==0){
+				break;
+			}
+			int a[] = new int[n];
+			for(int i=0;i&#60;n;i++){
+				a[i]=sc.nextInt();
+			}
+			
+			int second = 0;
+			for(int i=0;i&#60;n;i++){
+				if(i==0){
+					second += a[i]*6;
+				}else{
+					if(a[i]&#62;a[i-1]){
+						second= second+(a[i]-a[i-1])*6;
+					}
+					//题意是在同一层的还是要加5s
+//					if(a[i]==a[i-1]){
+//						second=second-5;
+//					}
+					if(a[i]&#60;a[i-1]){
+						second=second+(a[i-1]-a[i])*4;
+					}
+				}
+			}
+			second = second+n*5;
+			
+			System.out.println(second);
+		}
+	}
+
+}
+
+```
