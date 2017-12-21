@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "WordPress新用户注册时/修改密码提示“您的密码重设链接无效”"
-date: 2017-10-02 16:36:54 +0800
+date: 2017-12-21 20:36:54 +0800
 comments: true
 categories: WordPress
 tags: [WordPress]
