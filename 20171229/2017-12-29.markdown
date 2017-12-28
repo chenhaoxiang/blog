@@ -1,0 +1,17 @@
+---
+layout: post
+title: "【SpringBoot】数据库操作"
+date: 2017-12-28 20:22:54 +0800
+comments: true
+categories: SpringBoot
+tags: [SpringBoot]
+keyword: 陈浩翔, 谙忆, SpringBoot, 数据库操作
+description:  SpringBoot的数据库操作
+---
+
+在Spring-Boot进行数据库操作，我们需要用到Spring-Data-Jpa。 
+
+不多介绍Spring-Data-Jpa是什么了，直接用实例来说明。想了解Spring-Data-Jpa是什么的，直接百度即可  
+
+在下面的实例中，我们进行实现简单的数据库操作，也就是增删改查  
+
