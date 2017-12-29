@@ -15,6 +15,12 @@ spring:
         # create-drop  每次加载hibernate时根据model类生成表，但是sessionFactory一关闭，表就自动删除，下一次启动会重新创建。
         # validate：启动时验证表的结构，不一致的话会报错，不会创建表
         # none：启动时不做任何操作
-      show-sql: true #显示sql语句
+      show-sql: true
+      #显示sql语句
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 
 #在这里配置，无论选择dev还是prod配置文件都是会用到这里的
