@@ -1,0 +1,92 @@
+---
+layout: post
+title: "@Slf4j注解实现日志输出"
+date: 2018-01-08 20:05:54 +0800
+comments: true
+categories: Slf4j注解
+tags: [Slf4j注解]
+keyword: 陈浩翔, 谙忆, Slf4j注解, 日志输出
+description:  Slf4j注解实现日志输出
+---
+
+自己写日志的时候，肯定需要:
+```java
+private final Logger logger = LoggerFactory.getLogger(LoggerTest.class);
+```
+
+每次写新的类，就需要重新写logger  
+有简单的方式，就是使用@Slf4j注解  
+
+首先是在pom中引入:
+```java
+<!--可以引入日志 @Slf4j注解-->
+<dependency>
+	<groupId>org.projectlombok</groupId>
+	<artifactId>lombok</artifactId>
+</dependency>
+```
+
+然后在类上写上@Slf4j注解  
+在方法中直接使用  
+![](https://i.imgur.com/UIqg4ET.png)  
+
+如果注解@Slf4j注入后找不到变量log，需要IDEA安装lombok插件，  
+
+File  → settings →  Plugins  
+如图  
+![](https://i.imgur.com/kFA3xR2.png)  
+
+安装完成后重启即可  
+
+```java
+package cn.chenhaoxiang;
+
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.XSlf4j;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: 陈浩翔.
+ * Date: 2018/1/8.
+ * Time: 下午 8:05.
+ * Explain:日志测试
+ */
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@Slf4j
+public class LoggerTest {
+    private final Logger logger = LoggerFactory.getLogger(LoggerTest.class);
+
+    /**
+     * 传统方式实现日志
+     */
+    @Test
+    public void test1(){
+        logger.debug("debug");//默认日志级别为info
+        logger.info("info");
+        logger.error("error");
+        logger.warn("warn");
+    }
+
+    /**
+     * Slf4j注解方式实现日志
+     */
+    @Test
+    public void test2(){
+        log.debug("debug");//默认日志级别为info
+        log.info("info");
+        log.error("error");
+        log.warn("warn");
+    }
+
+}
+
+```
