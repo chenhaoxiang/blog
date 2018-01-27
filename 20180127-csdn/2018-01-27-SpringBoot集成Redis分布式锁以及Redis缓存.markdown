@@ -350,3 +350,11 @@ unless(除什么之外,如果不 的意思) 如果=0就缓存，需要写成!=0�
 GITHUB源码下载地址:<strong>【<a href='https://github.com/chenhaoxiang/WeChatOrderSystem' target='_blank'>点我进行访问</a>】</strong>
 </blockquote>
 
+
+本文章由<a href="chenhaoxiang" target='_blank'>[谙忆]</a>编写， 所有权利保留。 
+欢迎转载，分享是进步的源泉。
+<blockquote cite='陈浩翔'>
+<p background-color='#D3D3D3'>转载请注明出处：<a href='http://chenhaoxiang.cn/2018/01/27/0104/'><font color="green">http://chenhaoxiang.cn/2018/01/27/0104/</font></a><br>
+本文源自<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>谙忆的博客</a>】</strong></p>
+</blockquote>
+
