@@ -53,3 +53,10 @@ character-set-server=utf8
 ![](https://i.imgur.com/lq9BdfX.png)  
 
 重启mysql服务即可  
+
+本文章由<a href="chenhaoxiang" target='_blank'>[谙忆]</a>编写， 所有权利保留。 
+欢迎转载，分享是进步的源泉。
+<blockquote cite='陈浩翔'>
+<p background-color='#D3D3D3'>转载请注明出处：<a href='http://chenhaoxiang.cn/2017/12/29/2015/'><font color="green">http://chenhaoxiang.cn/2017/12/29/2015/</font></a><br>
+本文源自<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>谙忆的博客</a>】</strong></p>
+</blockquote>
