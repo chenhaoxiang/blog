@@ -64,7 +64,12 @@ add_filter('retrieve_password_message', reset_password_message, null, 2);
 ```
 
 将该方法直接加入到functions.php文件内即可。
-建议添加到第一行的"<?php"后面  
+建议添加到第一行的
+```
+<?php
+```
+后面  
+  
 ![](https://i.imgur.com/BgYGqQF.png)  
 
 注意:
@@ -73,13 +78,11 @@ add_filter('retrieve_password_message', reset_password_message, null, 2);
 
 感谢 http://www.cnblogs.com/liudecai/p/6474611.html 的博主提供的方式
 
-#源代码下载地址：
-GITHUB源码下载地址: [点我进行下载](http://chenhaoxiang.cn "点我进行下载")
-
 
 本文章由<a href="http://chenhaoxiang.cn/">[谙忆]</a>编写， 所有权利保留。 
 欢迎转载，分享是进步的源泉。
 <blockquote cite='陈浩翔'>
-<p background-color='#D3D3D3'>转载请注明出处：<a href='http://chenhaoxiang.cn'><font color="green">http://chenhaoxiang.cn</font></a><br><br>
-本文源自<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>人生之旅_谙忆的博客</a>】</strong></p>
+<p background-color='#D3D3D3'>转载请注明出处：<a href='http://chenhaoxiang.cn/2017/12/21/2056/'><font color="green">http://chenhaoxiang.cn/2017/12/21/2056/</font></a><br><br>
+本文源自<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>谙忆的博客</a>】</strong></p>
 </blockquote>
+
