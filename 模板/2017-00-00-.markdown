@@ -29,9 +29,26 @@ GITHUB源码下载地址:【**[点我进行下载](http://chenhaoxiang.cn "点�
 欢迎转载，分享是进步的源泉。
 <blockquote cite='陈浩翔'>
 <p background-color='#D3D3D3'>转载请注明出处：<a href='http://chenhaoxiang.cn'><font color="green">http://chenhaoxiang.cn</font></a><br><br>
-本文源自<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>人生之旅_谙忆的博客</a>】</strong></p>
+本文源自<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>谙忆的博客</a>】</strong></p>
 </blockquote>
 
 <a href="chenhaoxiang" target='_blank'>谙忆</a>
 
 http://chenhaoxiang.cn/2017/03/27/0738/ 有个链接没改！！！！！！！csdn的
+
+下面是阿里云栖打发表格式:
+#源代码下载地址：
+<blockquote cite='陈浩翔'>
+GITHUB源码下载地址:<strong>【[点我进行下载](https://github.com/chenhaoxiang/Shiro/tree/master/20171212/code/ShiroWeb)】</strong>
+</blockquote>
+
+
+本文章由<a href="http://chenhaoxiang.cn/">[谙忆]</a>编写， 所有权利保留。 
+欢迎转载，分享是进步的源泉。
+
+<blockquote cite='陈浩翔'>
+<p background-color='#D3D3D3'>转载请注明出处：[http://chenhaoxiang.cn/2017/12/12/2143/](http://chenhaoxiang.cn/2017/12/12/2143/)<br><br>
+本文源自<strong>【[谙忆的博客](http://chenhaoxiang.cn)】</strong></p>
+</blockquote>
+
+
