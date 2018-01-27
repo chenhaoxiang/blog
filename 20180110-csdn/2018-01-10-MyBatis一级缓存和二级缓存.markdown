@@ -327,3 +327,9 @@ Cache Hit Ratio 表示缓存命中率。
 3. 查询多于修改时使用二级缓存  
 在查询操作远远多于增删改操作的情况下可以使用二级缓存。因为任何增删改操作都将刷新二级缓存，对二级缓存的频繁刷新将降低系统性能。
 
+本文章由<a href="chenhaoxiang" target='_blank'>[谙忆]</a>编写， 所有权利保留。 
+欢迎转载，分享是进步的源泉。
+<blockquote cite='陈浩翔'>
+<p background-color='#D3D3D3'>转载请注明出处：<a href='http://chenhaoxiang.cn/2018/01/11/1222-3/'><font color="green">http://chenhaoxiang.cn/2018/01/11/1222-3/</font></a><br>
+本文源自<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>谙忆的博客</a>】</strong></p>
+</blockquote>
