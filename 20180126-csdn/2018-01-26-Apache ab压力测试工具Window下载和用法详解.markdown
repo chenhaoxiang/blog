@@ -130,4 +130,12 @@ Percentage of the requests served within a certain time (ms)
  100%   1283 (longest request)
 ```
 
-因为ab工具消耗小，所以有些人也用来进行ddos攻击，算一种ddos攻击工具  
+因为ab工具消耗小，所以有些人也用来进行ddos攻击，算一种ddos攻击工具 
+
+本文章由<a href="chenhaoxiang" target='_blank'>[谙忆]</a>编写， 所有权利保留。 
+欢迎转载，分享是进步的源泉。
+<blockquote cite='陈浩翔'>
+<p background-color='#D3D3D3'>转载请注明出处：<a href='http://chenhaoxiang.cn/2018/01/26/0920-2/'><font color="green">http://chenhaoxiang.cn/2018/01/26/0920-2/</font></a><br>
+本文源自<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>谙忆的博客</a>】</strong></p>
+</blockquote>
+ 
