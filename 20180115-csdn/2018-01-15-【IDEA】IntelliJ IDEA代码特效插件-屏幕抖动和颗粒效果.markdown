@@ -45,3 +45,10 @@ spark gravity factor % 重力大小-重力越大，小碎片漂浮高度越小�
 
 我也就开启了颗粒，因为开多了会影响IDEA智能补全的速度。  
 开启一个，稍稍增加点不一样的感觉，哈哈 调节下心情吧  
+
+本文章由<a href="chenhaoxiang" target='_blank'>[谙忆]</a>编写， 所有权利保留。 
+欢迎转载，分享是进步的源泉。
+<blockquote cite='陈浩翔'>
+<p background-color='#D3D3D3'>转载请注明出处：<a href='http://chenhaoxiang.cn/2018/01/15/1148/'><font color="green">http://chenhaoxiang.cn/2018/01/15/1148/</font></a><br>
+本文源自<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>谙忆的博客</a>】</strong></p>
+</blockquote>
