@@ -102,7 +102,7 @@ if ( post_password_required() ) {
 	<?php endif; // have_comments() ?>
 
 	<?php if ( ! comments_open() ) : ?>
-		<p class="no-comments">评论已关闭！</p>
+		<p class="no-comments">评论-已关闭！</p>
 	<?php endif; ?>	
 </div>
 <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>

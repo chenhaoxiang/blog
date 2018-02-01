@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
 * 修复WordPress找回密码提示“抱歉，该key似乎无效”问题
 */
@@ -21,6 +21,7 @@ function reset_password_message( $message, $key ) {
 }
 add_filter('retrieve_password_message', reset_password_message, null, 2);
 ////////////
+
 
 // 小工具
 if (function_exists('register_sidebar')){
@@ -1260,7 +1261,8 @@ if(!function_exists('sllPushData')){
         echo "<script>
 (function(){
    var src = (document.location.protocol == 'http:') ? 'http://js.passport.qihucdn.com/11.0.1.js?".$sllkey."':'https://jspassport.ssl.qhimg.com/11.0.1.js?".$sllkey."';
-   document.write('<script src='' + src + '' id='sozz'><\/script>');
+   //document.write('<script src='' + src + '' id='sozz'><\/script>');
+	 document.write('<script src=\'' + src + '\' id=\'sozz\'><\/script>');
 })();
 </script>";
    }

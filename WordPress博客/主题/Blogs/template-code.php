@@ -720,15 +720,11 @@ dp.sh.Toolbar.Command = function(name, sender)
 		<div class="single-content">
 <div class="xiaoshi">
 <p style="text-align: center;">
-<a href="http://boke112.com/2885.html" target="_blank">如何科学上网</a>&nbsp;&nbsp;
-<a href="http://boke112.com/dmgl/" target="_blank" rel="nofollow" title="在线将PHP、JS、CSS等代码转换为高亮显示的HTML代码">在线代码高亮转换</a>&nbsp;&nbsp;
-<a href="http://boke112.com/cssmh/" target="_blank" rel="nofollow" title="在线将CSS代码进行格式化、美化与压缩">CSS代码美化与压缩</a>&nbsp;&nbsp;
-<a href="http://boke112.com/jsmh/" target="_blank" rel="nofollow" title="在线将JS代码进行格式化、美化与压缩">JS代码美化与压缩</a>&nbsp;&nbsp;
-<a href="http://boke112.com/htmlmh/" target="_blank" rel="nofollow" title="在线将HTML代码进行格式化、美化与压缩">HTML代码美化与压缩</a>
+<a href="http://chenhaoxiang.cn/dmgl/" target="_blank" rel="nofollow" title="在线将PHP、JS、CSS等代码转换为高亮显示的HTML代码">在线代码高亮转换</a>&nbsp;&nbsp;
 </p>
 </div>		
 	<?php the_content(); ?>
-     <h2>在线代码高亮转换工具：适用于发表文章或者留言时粘代码之用，Design by <a title="Robin" href="http://zmingcx.com" target="_blank" rel="nofollow"> Robin</a>。</h2><br/>
+     <h2>在线代码高亮转换工具：适用于发表文章或者留言时粘代码之用</h2><br/>
 				<h2>输入源代码</h2>
 				<textarea title="输入源代码." class=java id=sourceCode style="width: 100%" name=sourceCode rows=6></textarea>
 				<h2>转换设置</h2>

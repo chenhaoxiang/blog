@@ -37,7 +37,7 @@ function readers_wall($limit = "100")
 		$c_url = $count->comment_author_url;
 
 		if (!$c_url) {
-			$c_url = "http://boke123.net";
+			$c_url = "http://chenhaoxiang.cn";
 		}
 
 		$tt = $i;

@@ -6,6 +6,12 @@
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta http-equiv="Cache-Control" content="no-siteapp">
 <meta name="renderer" content="webkit">
+
+	<?php if ( is_home()){ ?>	 
+<!-- 百度联盟 --> 
+<meta name="baidu_union_verify" content="3a442eceb002bfd2918745f253e21d2a">
+	<?php } ?>
+		
 <meta name="applicable-device" content="pc,mobile">
 <meta name="HandheldFriendly" content="true"/>
 <?php get_template_part( 'inc/functions/seo' ); ?>

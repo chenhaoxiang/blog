@@ -21,7 +21,22 @@
 </div>
 <div class="clear"></div>
 <div class="site-info">			
-			Copyright ©&nbsp;<a href="http://chenhaoxiang.cn/" target="_blank"> <?php bloginfo('name');?></a><span class="footer-tag">&nbsp; | &nbsp; Powered by WordPress &nbsp; | &nbsp;  <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow"><?php echo stripslashes(get_option('ygj_icp')); ?></a></span>
+			Copyright ©&nbsp;
+		<a href="http://chenhaoxiang.cn/" target="_blank"> 
+			<?php bloginfo('name');?>
+		</a>
+		<span class="footer-tag">
+				&nbsp; | &nbsp; Powered by WordPress &nbsp; | &nbsp;  
+			<a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">
+				<?php echo stripslashes(get_option('ygj_icp')); ?>
+			</a>
+		</span>
+<!-- 360网站安全验证-->
+	<?php if ( is_home()){ ?>	
+		<a href="http://webscan.360.cn/index/checkwebsite/url/chenhaoxiang.cn" target="_blank"><img border="0" style="height: 25px;" src="http://webscan.360.cn/status/pai/hash/f8cd0a6ff240bcc575aee0fbfd68243a"/></a>
+	<?php } ?>
+		
+
 		</div>
 </div>
 
@@ -52,6 +67,23 @@
         <a href="<?php echo stripslashes(get_option('ygj_lyburl')); ?>#respond" class="tools_comments" title="给我留言" target="_blank" rel="nofollow"></a>
     <?php } ?>
 </div>
+
+<!--百度自动推送-->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 <?php if (!get_option('ygj_post_baidu') ) { ?>
 <?php if (is_single() || is_page() ) { ?>
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText": "【" + $("title").text() + "】" + "<?php echo wp_trim_words( get_the_content(), 108, '...' );?>","bdMini":"2","bdMiniList":false,"bdPic": $(".single-content img:first") ? $(".single-content img:first").attr("src") : "","bdStyle":"1","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>

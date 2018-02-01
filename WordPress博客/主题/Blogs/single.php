@@ -1,4 +1,5 @@
 <?php get_header();?>
+
 <div id="content" class="site-content">	
 	<div class="clear"></div>
 	<div id="primary" class="content-area">
@@ -54,7 +55,7 @@
 						<div class="xiaoshi">
 							<div class="single_banquan">	
 								<strong>本文地址：</strong><a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"  target="_blank"><?php the_permalink() ?></a><br/>
-								<strong>关注我们：</strong>请关注一下我们的微信公众号：<a class="iboke112" href="JavaScript:void(0)">扫描二维码<span><img src="<?php echo esc_url( get_template_directory_uri() ); ?>/images/gongzhonghao.jpg" alt="<?php bloginfo('name'); ?>的公众号"></span></a>，公众号：Uifuture<br/>
+								<strong>关注我们：</strong>请关注一下我们的微信公众号：<a class="iboke112" href="JavaScript:void(0)">扫描二维码<span><img src="<?php echo esc_url( get_template_directory_uri() ); ?>/images/cxbczl.jpg" alt="<?php bloginfo('name'); ?>的公众号"></span></a>，公众号：程序编程之旅<br/>
 								<?php if ( get_post_meta($post->ID, 'tgwz', true) ) : ?>
 									<strong>温馨提示：</strong>文章内容系作者个人观点，不代表<?php bloginfo('name'); ?>对观点赞同或支持。<br/>
 									<strong>版权声明：</strong>本文为投稿文章，感谢&nbsp;<a href="<?php echo $wzurl; ?>" target="_blank" rel="nofollow"><?php echo $wzzz; ?></a>&nbsp;的投稿，版权归原作者所有，欢迎分享本文，转载请保留出处！
