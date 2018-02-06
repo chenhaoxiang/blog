@@ -252,14 +252,14 @@ log4j.appender.druid.File=${catalina.home}/logs/druid_spring_config/druid-slow-s
 
 ## 项目地址：
 <blockquote cite='陈浩翔'>
-GITHUB源码地址:<strong>【<a href='https://github.com/chenhaoxiang/Java/tree/master/mysql_split_horizon' target='_blank'>点我进行访问</a>】</strong>
+GITHUB源码地址:<strong>【<a href='https://github.com/chenhaoxiang/Java/tree/master/druid_spring_config' target='_blank'>点我进行访问</a>】</strong>
 </blockquote>
 
 
 本文章由<a href="chenhaoxiang" target='_blank'>[谙忆]</a>编写， 所有权利保留。 
 欢迎转载，分享是进步的源泉。
 <blockquote cite='陈浩翔'>
-<p background-color='#D3D3D3'>转载请注明出处：<a href='http://chenhaoxiang.cn/2018/02/05/2316/'><font color="green">http://chenhaoxiang.cn/2018/02/05/2316/</font></a><br>
+<p background-color='#D3D3D3'>转载请注明出处：<a href='http://chenhaoxiang.cn/2018/02/06/2255/'><font color="green">http://chenhaoxiang.cn/2018/02/06/2255/</font></a><br>
 本文源自<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>谙忆的博客</a>】</strong></p>
 </blockquote>
 
